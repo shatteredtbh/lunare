@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cart — Lunare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/shared.css"/>
+<style>
+.cart-page{display:grid;grid-template-columns:1fr 360px;min-height:70vh;border-bottom:1px solid var(--sand);}
+.cart-items{padding:3rem;border-right:1px solid var(--sand);}
+.cart-page-title{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;margin-bottom:2.5rem;}
+.cart-page-title em{font-style:italic;color:var(--dusk);}
+.cart-item{display:grid;grid-template-columns:80px 1fr auto;gap:1.5rem;align-items:center;padding:1.5rem 0;border-bottom:1px solid var(--bone);}
+.cart-item-swatch{width:80px;height:52px;border-radius:4px;display:flex;align-items:center;justify-content:center;}
+.cart-item-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--night);margin-bottom:4px;}
+.cart-item-tag{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);}
+.cart-item-price{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--night);}
+.cart-item-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.8rem;}
+.qty-control{display:flex;align-items:center;gap:0;border:1px solid var(--sand);}
+.qty-btn{width:30px;height:30px;background:none;border:none;cursor:pointer;font-size:16px;color:var(--accent);display:flex;align-items:center;justify-content:center;transition:background 0.15s;}
+.qty-btn:hover{background:var(--bone);}
+.qty-num{width:36px;text-align:center;font-size:13px;color:var(--night);}
+.remove-btn{font-size:10px;letter-spacing:0.1em;color:var(--clay);background:none;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+.remove-btn:hover{color:var(--night);}
+.cart-empty{text-align:center;padding:5rem 2rem;}
+.cart-empty p{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--accent);margin-bottom:1.5rem;}
+.cart-summary{padding:3rem;background:var(--bone);}
+.summary-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:2rem;}
+.summary-row{display:flex;justify-content:space-between;font-size:13px;color:var(--accent);margin-bottom:0.8rem;}
+.summary-total{display:flex;justify-content:space-between;font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--night);padding-top:1rem;border-top:1px solid var(--sand);margin-top:1rem;margin-bottom:2rem;}
+.checkout-btn{width:100%;padding:15px;background:var(--night);color:var(--cream);border:none;font-family:'Lato',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;margin-bottom:1rem;}
+.checkout-btn:hover{background:var(--dusk);}
+.checkout-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.continue-btn{width:100%;padding:12px;background:transparent;color:var(--accent);border:1px solid var(--sand);font-family:'Lato',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
+.continue-btn:hover{border-color:var(--dusk);color:var(--dusk);}
+.summary-note{font-size:11px;color:var(--clay);text-align:center;margin-top:1rem;line-height:1.6;}
+</style>
+</head>
+<body>
+<div id="nav-container"></div>
+<div class="cart-page">
+  <div class="cart-items">
+    <h1 class="cart-page-title">Your <em>cart.</em></h1>
+    <div id="cart-items-list"></div>
+  </div>
+  <div class="cart-summary">
+    <h2 class="summary-title">Order summary</h2>
+    <div id="summary-lines"></div>
+    <div class="summary-total"><span>Total</span><span id="summary-total">$0.00</span></div>
+    <button class="checkout-btn" id="checkout-btn" onclick="goCheckout()">Proceed to checkout</button>
+    <button class="continue-btn" onclick="window.location.href='/shop'">Continue shopping</button>
+    <p class="summary-note">Shipping calculated at checkout.<br/>Secure payment via Stripe.</p>
+  </div>
+</div>
+<div id="footer-container"></div>
+<div class="toast" id="toast"></div>
+<script src="/shared.js"></script>
+<script>
+document.getElementById('nav-container').innerHTML=navHTML('');
+document.getElementById('footer-container').innerHTML=footerHTML();
+initNav();
+function renderCart(){
+  const cart=getCart();
+  const list=document.getElementById('cart-items-list');
+  const summaryLines=document.getElementById('summary-lines');
+  const totalEl=document.getElementById('summary-total');
+  const checkoutBtn=document.getElementById('checkout-btn');
+  if(!cart.length){
+    list.innerHTML='<div class="cart-empty"><p>Your cart is empty.</p><button class="btn-primary" onclick="window.location.href=\'/shop\'">Shop now</button></div>';
+    summaryLines.innerHTML='';
+    totalEl.textContent='$0.00';
+    checkoutBtn.disabled=true;
+    return;
+  }
+  checkoutBtn.disabled=false;
+  list.innerHTML=cart.map(item=>`
+    <div class="cart-item">
+      <div class="cart-item-swatch ${item.swatch}"><div class="swatch-soap ${item.soap}" style="width:52px;height:32px;border-radius:4px;border:1px solid rgba(255,255,255,0.5);"></div></div>
+      <div>
+        <p class="cart-item-name">${item.name}</p>
+        <p class="cart-item-tag">${item.tag||'Handmade soap'}</p>
+      </div>
+      <div class="cart-item-right">
+        <p class="cart-item-price">$${(parseFloat(item.price)*item.quantity).toFixed(2)}</p>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="updateQuantity(${item.id},${item.quantity-1})">−</button>
+          <span class="qty-num">${item.quantity}</span>
+          <button class="qty-btn" onclick="updateQuantity(${item.id},${item.quantity+1})">+</button>
+        </div>
+        <button class="remove-btn" onclick="removeFromCart(${item.id});renderCart()">Remove</button>
+      </div>
+    </div>
+  `).join('');
+  summaryLines.innerHTML=cart.map(i=>`<div class="summary-row"><span>${i.name} × ${i.quantity}</span><span>$${(parseFloat(i.price)*i.quantity).toFixed(2)}</span></div>`).join('');
+  totalEl.textContent='$'+cartTotal().toFixed(2);
+}
+async function goCheckout(){
+  const cart=getCart();
+  if(!cart.length)return;
+  window.location.href='/checkout';
+}
+renderCart();
+</script>
+</body>
+</html>
