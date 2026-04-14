@@ -5,36 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lunare — Handmade Soap</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/shared.css"/>
 <style>
-:root {
-  --cream:#F5F0E8; --bone:#EDE7D9; --sand:#D6CBBA; --clay:#B8A898;
-  --dusk:#5C4F42; --night:#1E1A16; --moon:#F9F6F0; --accent:#8C7B6A;
-  --admin:#1a1f2e; --admin2:#252b3b; --admin3:#2f3650; --adminac:#7c8cf8;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--cream);color:var(--night);font-family:'Lato',sans-serif;font-weight:300;overflow-x:hidden;}
-
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3rem;background:var(--cream);border-bottom:1px solid var(--sand);}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;letter-spacing:0.25em;color:var(--night);text-decoration:none;}
-.nav-logo span{font-style:italic;}
-.nav-links{display:flex;gap:2.5rem;list-style:none;}
-.nav-links a{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);text-decoration:none;transition:color 0.2s;cursor:pointer;}
-.nav-links a:hover{color:var(--night);}
-.nav-cta{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:9px 22px;border:1px solid var(--dusk);background:transparent;color:var(--dusk);cursor:pointer;transition:all 0.2s;}
-.nav-cta:hover{background:var(--dusk);color:var(--cream);}
-
 .hero{display:grid;grid-template-columns:1fr 1fr;min-height:90vh;border-bottom:1px solid var(--sand);}
 .hero-left{padding:6rem 4rem;display:flex;flex-direction:column;justify-content:center;gap:2rem;border-right:1px solid var(--sand);animation:fadeUp 1s ease both;}
 .hero-eyebrow{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;line-height:1.05;color:var(--night);}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;line-height:1.05;}
 .hero-title em{font-style:italic;color:var(--dusk);}
 .hero-body{font-size:15px;line-height:1.85;color:var(--accent);max-width:380px;}
 .hero-actions{display:flex;gap:1rem;align-items:center;margin-top:1rem;}
-.btn-primary{padding:13px 32px;background:var(--night);color:var(--cream);border:none;font-family:'Lato',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
-.btn-primary:hover{background:var(--dusk);}
-.btn-ghost{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);cursor:pointer;border:none;background:none;text-decoration:underline;text-underline-offset:4px;transition:color 0.2s;}
-.btn-ghost:hover{color:var(--night);}
 .hero-right{background:var(--bone);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;animation:fadeIn 1.4s ease both;}
 .moon-scene{position:relative;width:320px;height:320px;}
 .moon-circle{width:240px;height:240px;border-radius:50%;background:var(--moon);border:1px solid var(--sand);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:moonPulse 6s ease-in-out infinite;display:flex;align-items:center;justify-content:center;}
@@ -45,44 +24,15 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .soap-bar-1{width:52px;height:32px;top:18%;left:8%;}
 .soap-bar-2{width:40px;height:24px;bottom:22%;right:10%;animation-delay:1.5s;}
 .soap-bar-3{width:36px;height:22px;top:60%;left:5%;animation-delay:0.8s;}
-
 @keyframes floatBar{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-10px) rotate(2deg);}}
 @keyframes moonPulse{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.03);}}
 @keyframes moonRing{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.5;}50%{transform:translate(-50%,-50%) scale(1.04);opacity:0.2;}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-
-.ticker{overflow:hidden;padding:0.7rem 0;background:var(--night);color:var(--sand);border-bottom:1px solid var(--dusk);}
-.ticker-inner{display:flex;gap:4rem;width:max-content;animation:ticker 20s linear infinite;}
-.ticker-inner span{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;white-space:nowrap;}
-.ticker-inner span.sep{color:var(--accent);}
-@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-
-.products{padding:5rem 3rem;border-bottom:1px solid var(--sand);}
+.featured{padding:5rem 3rem;border-bottom:1px solid var(--sand);}
 .section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;}
-.section-eyebrow{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;}
-.section-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--night);}
 .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--sand);background:var(--sand);overflow:hidden;border-radius:4px;}
-.product-card{background:var(--cream);padding:2rem 1.8rem 2.5rem;cursor:pointer;transition:background 0.2s;position:relative;overflow:hidden;}
-.product-card::after{content:'';position:absolute;bottom:0;left:0;height:2px;width:0;background:var(--dusk);transition:width 0.3s ease;}
-.product-card:hover::after{width:100%;}
-.product-card:hover{background:var(--moon);}
-.product-swatch{width:100%;height:160px;border-radius:4px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;}
-.swatch-a{background:#E8E0D5;}.swatch-b{background:#D8E5DF;}.swatch-c{background:#E5DCE8;}
-.swatch-soap{width:70px;height:44px;border-radius:6px;border:1px solid rgba(255,255,255,0.6);position:relative;}
-.swatch-soap::after{content:attr(data-label);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:9px;letter-spacing:0.15em;color:var(--dusk);white-space:nowrap;}
-.soap-a{background:#F0EAE0;}.soap-b{background:#C8DDD5;}.soap-c{background:#D8CFE0;}
-.product-tag{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;}
-.product-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;margin-bottom:0.6rem;color:var(--night);}
-.product-desc{font-size:13px;color:var(--accent);line-height:1.7;margin-bottom:1.2rem;}
-.product-footer{display:flex;justify-content:space-between;align-items:center;}
-.product-price{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--night);}
-.add-btn{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:7px 16px;border:1px solid var(--dusk);background:transparent;color:var(--dusk);cursor:pointer;transition:all 0.2s;}
-.add-btn:hover{background:var(--dusk);color:var(--cream);}
-
-.about{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--sand);min-height:500px;}
+.about{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--sand);min-height:480px;}
 .about-text{padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center;gap:1.5rem;border-right:1px solid var(--sand);}
-.about-title{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;line-height:1.15;color:var(--night);}
+.about-title{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;line-height:1.15;}
 .about-title em{font-style:italic;color:var(--dusk);}
 .about-body{font-size:15px;color:var(--accent);line-height:1.9;max-width:420px;}
 .about-values{display:flex;flex-direction:column;gap:1rem;margin-top:1rem;}
@@ -94,10 +44,8 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .ingredient-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;width:100%;max-width:320px;border:1px solid var(--sand);background:var(--sand);border-radius:4px;overflow:hidden;}
 .ingredient-cell{background:var(--cream);padding:1.5rem 1.2rem;transition:background 0.2s;}
 .ingredient-cell:hover{background:var(--moon);}
-.ing-icon{width:32px;height:32px;margin-bottom:0.8rem;}
-.ing-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;color:var(--night);margin-bottom:4px;}
+.ing-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;color:var(--night);margin-bottom:3px;}
 .ing-desc{font-size:11px;color:var(--accent);line-height:1.5;}
-
 .process{padding:5rem 3rem;border-bottom:1px solid var(--sand);}
 .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--sand);border:1px solid var(--sand);border-radius:4px;overflow:hidden;margin-top:3rem;}
 .step{background:var(--cream);padding:2.5rem 1.8rem;transition:background 0.2s;}
@@ -105,164 +53,33 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .step-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--bone);line-height:1;margin-bottom:1rem;}
 .step-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--night);margin-bottom:0.6rem;}
 .step-desc{font-size:13px;color:var(--accent);line-height:1.7;}
-
 .testimonials{padding:5rem 3rem;border-bottom:1px solid var(--sand);background:var(--bone);}
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;}
 .testi-card{background:var(--cream);border:1px solid var(--sand);border-radius:4px;padding:2rem;}
 .testi-stars{color:var(--dusk);font-size:12px;letter-spacing:2px;margin-bottom:1rem;}
 .testi-quote{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;font-style:italic;color:var(--night);line-height:1.7;margin-bottom:1.2rem;}
 .testi-author{font-size:11px;letter-spacing:0.12em;color:var(--accent);}
-
-.newsletter{padding:5rem 3rem;text-align:center;background:var(--night);color:var(--cream);border-bottom:1px solid var(--dusk);}
+.newsletter{padding:5rem 3rem;text-align:center;background:var(--night);color:var(--cream);}
 .newsletter-title{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;margin-bottom:1rem;color:var(--moon);}
 .newsletter-sub{font-size:14px;color:var(--clay);margin-bottom:2.5rem;line-height:1.7;}
-.newsletter-form{display:flex;max-width:440px;margin:0 auto;border:1px solid var(--dusk);}
+.newsletter-form{display:flex;max-width:440px;margin:0 auto;border:1px solid #3a3530;}
 .newsletter-form input{flex:1;padding:14px 18px;background:transparent;border:none;outline:none;font-family:'Lato',sans-serif;font-size:13px;color:var(--cream);}
 .newsletter-form input::placeholder{color:var(--accent);}
-.newsletter-form button{padding:14px 24px;background:var(--dusk);color:var(--cream);border:none;cursor:pointer;font-family:'Lato',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;transition:background 0.2s;}
+.newsletter-form button{padding:14px 24px;background:var(--dusk);color:var(--cream);border:none;cursor:pointer;font-family:'Lato',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;}
 .newsletter-form button:hover{background:var(--clay);}
-
-footer{padding:3rem 3rem 2rem;background:var(--night);color:var(--clay);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;border-top:1px solid var(--dusk);}
-.footer-brand{display:flex;flex-direction:column;gap:1rem;}
-.footer-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;letter-spacing:0.25em;color:var(--moon);}
-.footer-tagline{font-size:12px;color:var(--accent);line-height:1.7;max-width:220px;}
-.footer-col h4{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--moon);margin-bottom:1.2rem;font-weight:400;}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
-.footer-col a{font-size:13px;color:var(--accent);text-decoration:none;transition:color 0.2s;cursor:pointer;}
-.footer-col a:hover{color:var(--cream);}
-.footer-bottom{padding:1.5rem 3rem;background:var(--night);border-top:1px solid var(--dusk);display:flex;justify-content:space-between;}
-.footer-bottom p{font-size:11px;color:var(--accent);letter-spacing:0.08em;}
-
-.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal.visible{opacity:1;transform:none;}
-
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--night);color:var(--cream);padding:14px 24px;border-radius:4px;font-size:12px;letter-spacing:0.1em;transform:translateY(80px);opacity:0;transition:all 0.35s ease;z-index:9999;max-width:300px;}
-.toast.show{transform:translateY(0);opacity:1;}
-
-/* AUTH MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(30,26,22,0.6);align-items:center;justify-content:center;}
-.modal-overlay.open{display:flex;}
-.modal-box{background:var(--cream);border:1px solid var(--sand);width:100%;max-width:420px;padding:3rem 2.5rem;position:relative;animation:modalIn 0.25s ease;max-height:90vh;overflow-y:auto;}
-@keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-.modal-close{position:absolute;top:1.2rem;right:1.4rem;background:none;border:none;cursor:pointer;font-size:20px;color:var(--clay);}
-.modal-close:hover{color:var(--night);}
-.modal-logo{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:0.25em;font-weight:300;color:var(--night);margin-bottom:0.4rem;}
-.modal-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--night);margin-bottom:0.5rem;}
-.modal-title em{font-style:italic;color:var(--dusk);}
-.modal-sub{font-size:13px;color:var(--accent);margin-bottom:2rem;line-height:1.6;}
-.auth-field{margin-bottom:1.2rem;}
-.auth-field label{display:block;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
-.auth-field input{width:100%;padding:11px 14px;border:1px solid var(--sand);background:var(--moon);font-family:'Lato',sans-serif;font-size:14px;font-weight:300;color:var(--night);outline:none;transition:border-color 0.2s;}
-.auth-field input:focus{border-color:var(--dusk);}
-.auth-field input.error{border-color:#c0392b;}
-.auth-error{font-size:12px;color:#c0392b;margin-bottom:1rem;min-height:18px;}
-.auth-submit{width:100%;padding:13px;background:var(--night);color:var(--cream);border:none;font-family:'Lato',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;margin-top:0.5rem;}
-.auth-submit:hover{background:var(--dusk);}
-.auth-submit:disabled{opacity:0.6;cursor:not-allowed;}
-.auth-switch{text-align:center;font-size:12px;color:var(--accent);margin-top:1.5rem;}
-.auth-switch a{color:var(--dusk);text-decoration:underline;text-underline-offset:3px;cursor:pointer;}
-.auth-panel{display:none;}
-.auth-panel.active{display:block;}
-
-/* ADMIN PANEL */
-.admin-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(10,12,20,0.85);align-items:flex-start;justify-content:center;padding:2rem;overflow-y:auto;}
-.admin-overlay.open{display:flex;}
-.admin-panel{background:var(--admin);color:#e2e8f0;width:100%;max-width:940px;border-radius:8px;overflow:hidden;animation:modalIn 0.3s ease;display:flex;flex-direction:column;max-height:88vh;}
-.admin-header{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 2rem;background:var(--admin2);border-bottom:1px solid var(--admin3);flex-shrink:0;}
-.admin-logo{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:0.2em;color:#fff;}
-.admin-tag{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;background:var(--adminac);color:#fff;padding:3px 8px;border-radius:3px;margin-left:0.6rem;}
-.admin-close{background:none;border:none;cursor:pointer;color:#64748b;font-size:20px;}
-.admin-close:hover{color:#fff;}
-.admin-tabs{display:flex;border-bottom:1px solid var(--admin3);flex-shrink:0;}
-.admin-tab{padding:0.9rem 1.5rem;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#64748b;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Lato',sans-serif;}
-.admin-tab:hover{color:#e2e8f0;}
-.admin-tab.active{color:var(--adminac);border-bottom-color:var(--adminac);}
-.admin-body{padding:2rem;overflow-y:auto;flex:1;}
-.admin-section{display:none;}
-.admin-section.active{display:block;}
-.admin-section-title{font-size:16px;font-weight:400;color:#fff;margin-bottom:1.5rem;padding-bottom:0.8rem;border-bottom:1px solid var(--admin3);}
-.admin-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem;}
-.admin-stat{background:var(--admin2);border:1px solid var(--admin3);border-radius:6px;padding:1.2rem;}
-.admin-stat-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#64748b;margin-bottom:0.4rem;}
-.admin-stat-val{font-size:28px;font-weight:400;color:#fff;}
-.product-editor{background:var(--admin2);border:1px solid var(--admin3);border-radius:6px;margin-bottom:1rem;overflow:hidden;}
-.product-editor-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;cursor:pointer;transition:background 0.2s;}
-.product-editor-header:hover{background:var(--admin3);}
-.product-editor-title{font-size:14px;color:#e2e8f0;}
-.product-editor-body{padding:1.2rem;border-top:1px solid var(--admin3);display:none;}
-.product-editor-body.open{display:block;}
-.admin-field{margin-bottom:1rem;}
-.admin-field label{display:block;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#64748b;margin-bottom:6px;}
-.admin-field input,.admin-field textarea,.admin-field select{width:100%;padding:9px 12px;background:var(--admin);border:1px solid var(--admin3);color:#e2e8f0;font-family:'Lato',sans-serif;font-size:13px;border-radius:4px;outline:none;transition:border-color 0.2s;}
-.admin-field input:focus,.admin-field textarea:focus{border-color:var(--adminac);}
-.admin-field textarea{resize:vertical;min-height:70px;}
-.admin-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.admin-btn{padding:8px 18px;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;font-family:'Lato',sans-serif;transition:all 0.2s;}
-.admin-btn:disabled{opacity:0.5;cursor:not-allowed;}
-.admin-btn-primary{background:var(--adminac);color:#fff;}
-.admin-btn-primary:hover:not(:disabled){background:#6366f1;}
-.admin-btn-danger{background:#ef4444;color:#fff;}
-.admin-btn-danger:hover:not(:disabled){background:#dc2626;}
-.admin-btn-ghost{background:transparent;color:#64748b;border:1px solid var(--admin3);}
-.admin-btn-ghost:hover{color:#e2e8f0;border-color:#64748b;}
-.add-product-btn{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;padding:1rem;border:1px dashed var(--admin3);border-radius:6px;background:transparent;color:#64748b;cursor:pointer;font-family:'Lato',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s;margin-bottom:1rem;}
-.add-product-btn:hover{border-color:var(--adminac);color:var(--adminac);}
-.admin-table{width:100%;border-collapse:collapse;font-size:13px;}
-.admin-table th{text-align:left;padding:0.7rem 1rem;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#64748b;border-bottom:1px solid var(--admin3);font-weight:400;}
-.admin-table td{padding:0.8rem 1rem;border-bottom:1px solid var(--admin3);color:#e2e8f0;}
-.admin-table tr:hover td{background:var(--admin2);}
-.user-role-badge{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;}
-.role-admin{background:#4f46e5;color:#fff;}
-.role-user{background:var(--admin3);color:#94a3b8;}
-.settings-group{background:var(--admin2);border:1px solid var(--admin3);border-radius:6px;padding:1.5rem;margin-bottom:1.5rem;}
-.settings-group-title{font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--adminac);margin-bottom:1.2rem;}
-.settings-row{display:flex;align-items:center;justify-content:space-between;padding:0.8rem 0;border-bottom:1px solid var(--admin3);}
-.settings-row:last-child{border-bottom:none;}
-.settings-label{font-size:13px;color:#e2e8f0;}
-.settings-desc{font-size:11px;color:#64748b;margin-top:2px;}
-.toggle{position:relative;width:40px;height:22px;cursor:pointer;}
-.toggle input{opacity:0;width:0;height:0;}
-.toggle-slider{position:absolute;inset:0;background:var(--admin3);border-radius:22px;transition:0.3s;}
-.toggle-slider::before{content:'';position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#64748b;border-radius:50%;transition:0.3s;}
-.toggle input:checked+.toggle-slider{background:var(--adminac);}
-.toggle input:checked+.toggle-slider::before{transform:translateX(18px);background:#fff;}
 </style>
 </head>
 <body>
-
-<nav>
-  <a class="nav-logo" href="#"><span>L</span>UNARE</a>
-  <ul class="nav-links">
-    <li><a onclick="scrollTo2('products')">Shop</a></li>
-    <li><a onclick="scrollTo2('about')">Our story</a></li>
-    <li><a onclick="scrollTo2('process')">Process</a></li>
-    <li><a onclick="scrollTo2('contact')">Contact</a></li>
-  </ul>
-  <div style="display:flex;gap:0.8rem;align-items:center;">
-    <button class="nav-cta" id="auth-btn" onclick="openModal('login')">Sign in</button>
-    <div id="user-menu" style="display:none;position:relative;">
-      <button class="nav-cta" onclick="toggleUserMenu()" id="user-btn">Account ▾</button>
-      <div id="user-dropdown" style="display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--cream);border:1px solid var(--sand);min-width:190px;z-index:200;">
-        <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--sand);">
-          <p style="font-size:12px;color:var(--accent);margin-bottom:2px;">Signed in as</p>
-          <p style="font-size:13px;color:var(--night);font-weight:400;" id="dropdown-name"></p>
-        </div>
-        <a id="admin-panel-link" onclick="openAdmin()" style="display:none;padding:0.8rem 1.2rem;font-size:12px;letter-spacing:0.1em;color:var(--adminac);cursor:pointer;border-bottom:1px solid var(--sand);" onmouseenter="this.style.background='var(--bone)'" onmouseleave="this.style.background=''">⚙ Admin panel</a>
-        <a style="display:block;padding:0.8rem 1.2rem;font-size:12px;color:var(--accent);cursor:pointer;border-bottom:1px solid var(--sand);" onmouseenter="this.style.background='var(--bone)'" onmouseleave="this.style.background=''">My orders</a>
-        <a onclick="doLogout()" style="display:block;padding:0.8rem 1.2rem;font-size:12px;color:var(--dusk);cursor:pointer;" onmouseenter="this.style.background='var(--bone)'" onmouseleave="this.style.background=''">Sign out</a>
-      </div>
-    </div>
-  </div>
-</nav>
-
+<div id="nav-container"></div>
+<div class="ticker"><div class="ticker-inner"><span>100% handmade</span><span class="sep">·</span><span>No synthetic fragrance</span><span class="sep">·</span><span>Cold process method</span><span class="sep">·</span><span>Small batch only</span><span class="sep">·</span><span>Plastic-free packaging</span><span class="sep">·</span><span>Made with love</span><span class="sep">·</span><span>100% handmade</span><span class="sep">·</span><span>No synthetic fragrance</span><span class="sep">·</span><span>Cold process method</span><span class="sep">·</span><span>Small batch only</span><span class="sep">·</span><span>Plastic-free packaging</span><span class="sep">·</span><span>Made with love</span><span class="sep">·</span></div></div>
 <section class="hero">
   <div class="hero-left">
     <p class="hero-eyebrow" id="site-eyebrow">Handmade · Small batch · Moon-inspired</p>
     <h1 class="hero-title">Soap as<br/><em>ritual,</em><br/>not routine.</h1>
     <p class="hero-body" id="site-tagline">Every Lunare bar is shaped by hand, cured under moonlight lore, and made with ingredients that are honest about where they came from.</p>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="scrollTo2('products')">Explore the collection</button>
-      <button class="btn-ghost" onclick="scrollTo2('about')">Our story</button>
+      <button class="btn-primary" onclick="window.location.href='/shop'">Shop the collection</button>
+      <button class="btn-ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Our story</button>
     </div>
   </div>
   <div class="hero-right">
@@ -273,22 +90,13 @@ footer{padding:3rem 3rem 2rem;background:var(--night);color:var(--clay);display:
     </div>
   </div>
 </section>
-
-<div class="ticker">
-  <div class="ticker-inner">
-    <span>100% handmade</span><span class="sep">·</span><span>No synthetic fragrance</span><span class="sep">·</span><span>Cold process method</span><span class="sep">·</span><span>Small batch only</span><span class="sep">·</span><span>Plastic-free packaging</span><span class="sep">·</span><span>Made with love</span><span class="sep">·</span>
-    <span>100% handmade</span><span class="sep">·</span><span>No synthetic fragrance</span><span class="sep">·</span><span>Cold process method</span><span class="sep">·</span><span>Small batch only</span><span class="sep">·</span><span>Plastic-free packaging</span><span class="sep">·</span><span>Made with love</span><span class="sep">·</span>
-  </div>
-</div>
-
-<section class="products reveal" id="products">
+<section class="featured reveal">
   <div class="section-header">
-    <div><p class="section-eyebrow">The collection</p><h2 class="section-title">Each bar, a phase.</h2></div>
-    <button class="btn-ghost">View all →</button>
+    <div><p class="section-eyebrow">Featured</p><h2 class="section-title">Current favourites.</h2></div>
+    <button class="btn-ghost" onclick="window.location.href='/shop'">View all →</button>
   </div>
-  <div class="products-grid" id="products-grid"><p style="padding:2rem;color:var(--accent);font-size:13px;">Loading...</p></div>
+  <div class="products-grid" id="featured-grid"><p style="padding:2rem;color:var(--accent);font-size:13px;">Loading...</p></div>
 </section>
-
 <section class="about reveal" id="about">
   <div class="about-text">
     <p class="section-eyebrow">Our story</p>
@@ -302,491 +110,61 @@ footer{padding:3rem 3rem 2rem;background:var(--night);color:var(--clay);display:
   </div>
   <div class="about-visual">
     <div class="ingredient-grid">
-      <div class="ingredient-cell"><div class="ing-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8C7B6A" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div><p class="ing-name">Shea butter</p><p class="ing-desc">Unrefined. Cold-pressed from West Africa.</p></div>
-      <div class="ingredient-cell"><div class="ing-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8C7B6A" stroke-width="1.2"><path d="M12 2c0 0-6 4-6 10a6 6 0 0012 0C18 6 12 2 12 2z"/></svg></div><p class="ing-name">Olive oil</p><p class="ing-desc">Extra virgin. The base of every bar.</p></div>
-      <div class="ingredient-cell"><div class="ing-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8C7B6A" stroke-width="1.2"><path d="M12 22V12M12 12C12 7 7 4 4 6M12 12C12 7 17 4 20 6"/></svg></div><p class="ing-name">Essential oils</p><p class="ing-desc">Pure plant-sourced only. Never synthetic.</p></div>
-      <div class="ingredient-cell"><div class="ing-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8C7B6A" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><p class="ing-name">Raw honey</p><p class="ing-desc">Local. Unfiltered. Natural humectant.</p></div>
+      <div class="ingredient-cell"><p class="ing-name">Shea butter</p><p class="ing-desc">Unrefined. Cold-pressed.</p></div>
+      <div class="ingredient-cell"><p class="ing-name">Olive oil</p><p class="ing-desc">Extra virgin. Every bar.</p></div>
+      <div class="ingredient-cell"><p class="ing-name">Essential oils</p><p class="ing-desc">Plant-sourced only.</p></div>
+      <div class="ingredient-cell"><p class="ing-name">Raw honey</p><p class="ing-desc">Local. Unfiltered.</p></div>
     </div>
   </div>
 </section>
-
 <section class="process reveal" id="process">
   <div class="section-header"><div><p class="section-eyebrow">How it's made</p><h2 class="section-title">From raw to ritual.</h2></div></div>
   <div class="process-steps">
-    <div class="step"><p class="step-num">01</p><h3 class="step-name">Measure</h3><p class="step-desc">Every ingredient weighed to the gram. No guessing, no shortcuts.</p></div>
-    <div class="step"><p class="step-num">02</p><h3 class="step-name">Mix</h3><p class="step-desc">Oils and lye combined by hand using the cold-process method.</p></div>
-    <div class="step"><p class="step-num">03</p><h3 class="step-name">Pour & cut</h3><p class="step-desc">Poured into molds, left to set, then hand-cut one bar at a time.</p></div>
-    <div class="step"><p class="step-num">04</p><h3 class="step-name">Cure</h3><p class="step-desc">Rested for 4–6 weeks until hard, mild, and ready for your skin.</p></div>
+    <div class="step"><p class="step-num">01</p><h3 class="step-name">Measure</h3><p class="step-desc">Every ingredient weighed to the gram.</p></div>
+    <div class="step"><p class="step-num">02</p><h3 class="step-name">Mix</h3><p class="step-desc">Oils and lye combined by hand, cold-process.</p></div>
+    <div class="step"><p class="step-num">03</p><h3 class="step-name">Pour & cut</h3><p class="step-desc">Poured into molds, set, then hand-cut.</p></div>
+    <div class="step"><p class="step-num">04</p><h3 class="step-name">Cure</h3><p class="step-desc">Rested 4–6 weeks until perfect.</p></div>
   </div>
 </section>
-
 <section class="testimonials reveal">
-  <div class="section-header"><div><p class="section-eyebrow">What people say</p><h2 class="section-title">Honest reviews.</h2></div></div>
+  <div class="section-header"><div><p class="section-eyebrow">Reviews</p><h2 class="section-title">Honest words.</h2></div></div>
   <div class="testi-grid">
-    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"I've tried a lot of handmade soaps. This is the first one that actually feels different — softer skin after one use."</p><p class="testi-author">— Sarah M., San Francisco</p></div>
-    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"River Sage is now a permanent fixture in my shower. The scent is subtle, not overwhelming. Just right."</p><p class="testi-author">— James T., Portland</p></div>
-    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Bought as a gift and ended up keeping one for myself. The packaging is beautiful and it lasts forever."</p><p class="testi-author">— Priya K., New York</p></div>
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Softer skin after one use. I've never experienced that with any soap before."</p><p class="testi-author">— Sarah M., San Francisco</p></div>
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"River Sage is a permanent fixture in my shower now. Subtle, fresh, perfect."</p><p class="testi-author">— James T., Portland</p></div>
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Bought as a gift, kept one for myself. The packaging is beautiful and it lasts."</p><p class="testi-author">— Priya K., New York</p></div>
   </div>
 </section>
-
-<section class="newsletter reveal" id="contact">
+<section class="newsletter reveal">
   <p class="section-eyebrow" style="color:var(--clay);margin-bottom:0.8rem;">Stay close</p>
   <h2 class="newsletter-title">New batches. Moon notes.<br/>Nothing else.</h2>
-  <p class="newsletter-sub">We send one email a month. Sometimes less.<br/>Always worth it.</p>
-  <div class="newsletter-form">
-    <input type="email" placeholder="your@email.com" id="email-input"/>
-    <button onclick="subscribe()">Subscribe</button>
-  </div>
+  <p class="newsletter-sub">One email a month. Sometimes less. Always worth it.</p>
+  <div class="newsletter-form"><input type="email" placeholder="your@email.com" id="nl-email"/><button onclick="subscribe()">Subscribe</button></div>
 </section>
-
-<footer>
-  <div class="footer-brand"><div class="footer-logo">LUNARE</div><p class="footer-tagline">Handmade soap made slowly, in small batches, with real ingredients.</p></div>
-  <div class="footer-col"><h4>Shop</h4><ul><li><a>All soaps</a></li><li><a>Gift sets</a></li><li><a>Bundles</a></li></ul></div>
-  <div class="footer-col"><h4>Info</h4><ul><li><a>Our story</a></li><li><a>Ingredients</a></li><li><a>FAQ</a></li></ul></div>
-  <div class="footer-col"><h4>Connect</h4><ul><li><a>Instagram</a></li><li><a>Contact us</a></li><li><a>Wholesale</a></li></ul></div>
-</footer>
-<div class="footer-bottom"><p>© 2026 Lunare. All rights reserved.</p><p>Made with care</p></div>
-
-<!-- AUTH MODAL -->
-<div class="modal-overlay" id="auth-modal" onclick="handleOverlayClick(event)">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">&#x2715;</button>
-    <p class="modal-logo">LUNARE</p>
-    <div class="auth-panel active" id="panel-login">
-      <h2 class="modal-title">Welcome <em>back.</em></h2>
-      <p class="modal-sub">Sign in to your Lunare account.</p>
-      <div class="auth-error" id="login-error"></div>
-      <div class="auth-field"><label>Email / username</label><input type="text" id="login-email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')doLogin()"/></div>
-      <div class="auth-field"><label>Password</label><input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/></div>
-      <button class="auth-submit" id="login-btn" onclick="doLogin()">Sign in</button>
-      <div class="auth-switch">No account? <a onclick="switchPanel('signup')">Create one</a> &nbsp;·&nbsp; <a onclick="switchPanel('reset')">Forgot password?</a></div>
-    </div>
-    <div class="auth-panel" id="panel-signup">
-      <h2 class="modal-title">Join <em>Lunare.</em></h2>
-      <p class="modal-sub">Create your free account.</p>
-      <div class="auth-error" id="signup-error"></div>
-      <div class="auth-field"><label>First name</label><input type="text" id="signup-name" placeholder="Luna" onkeydown="if(event.key==='Enter')doSignup()"/></div>
-      <div class="auth-field"><label>Email</label><input type="email" id="signup-email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')doSignup()"/></div>
-      <div class="auth-field"><label>Password</label><input type="password" id="signup-pass" placeholder="At least 6 characters" onkeydown="if(event.key==='Enter')doSignup()"/></div>
-      <div class="auth-field"><label>Confirm password</label><input type="password" id="signup-pass2" placeholder="••••••••" onkeydown="if(event.key==='Enter')doSignup()"/></div>
-      <button class="auth-submit" id="signup-btn" onclick="doSignup()">Create account</button>
-      <div class="auth-switch">Already have an account? <a onclick="switchPanel('login')">Sign in</a></div>
-    </div>
-    <div class="auth-panel" id="panel-reset">
-      <h2 class="modal-title">Reset <em>password.</em></h2>
-      <p class="modal-sub">Enter your email and we'll send instructions.</p>
-      <div class="auth-error" id="reset-error"></div>
-      <div class="auth-field"><label>Email</label><input type="email" id="reset-email" placeholder="your@email.com"/></div>
-      <button class="auth-submit" onclick="doReset()">Send reset link</button>
-      <div class="auth-switch"><a onclick="switchPanel('login')">← Back to sign in</a></div>
-    </div>
-    <div class="auth-panel" id="panel-success">
-      <div style="text-align:center;padding:1rem 0;">
-        <div style="width:52px;height:52px;border-radius:50%;border:1px solid var(--sand);margin:0 auto 1.2rem;display:flex;align-items:center;justify-content:center;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--dusk)" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h2 class="modal-title" id="success-title">Welcome.</h2>
-        <p class="modal-sub" id="success-msg" style="margin-bottom:1.5rem;"></p>
-        <button class="auth-submit" onclick="closeModal()">Continue shopping</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="admin-overlay" id="admin-overlay" onclick="handleAdminOverlay(event)">
-  <div class="admin-panel">
-    <div class="admin-header">
-      <div style="display:flex;align-items:center;">
-        <span class="admin-logo">LUNARE</span><span class="admin-tag">Admin</span>
-      </div>
-      <button class="admin-close" onclick="closeAdmin()">&#x2715;</button>
-    </div>
-    <div class="admin-tabs">
-      <button class="admin-tab active" onclick="adminTab('dashboard')">Dashboard</button>
-      <button class="admin-tab" onclick="adminTab('products')">Products</button>
-      <button class="admin-tab" onclick="adminTab('users')">Users</button>
-      <button class="admin-tab" onclick="adminTab('site')">Site settings</button>
-    </div>
-    <div class="admin-body">
-      <div class="admin-section active" id="admin-dashboard">
-        <p class="admin-section-title">Overview</p>
-        <div class="admin-grid">
-          <div class="admin-stat"><p class="admin-stat-label">Registered users</p><p class="admin-stat-val" id="stat-users">—</p></div>
-          <div class="admin-stat"><p class="admin-stat-label">Products live</p><p class="admin-stat-val" id="stat-products">—</p></div>
-          <div class="admin-stat"><p class="admin-stat-label">Newsletter subs</p><p class="admin-stat-val" id="stat-subs">—</p></div>
-        </div>
-        <p class="admin-section-title" style="margin-top:1.5rem;">Recent signups</p>
-        <table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Joined</th><th>Role</th></tr></thead><tbody id="recent-signups-body"></tbody></table>
-      </div>
-      <div class="admin-section" id="admin-products">
-        <p class="admin-section-title">Edit products</p>
-        <button class="add-product-btn" onclick="addProduct()">+ Add new product</button>
-        <div id="product-editors"></div>
-        <div style="margin-top:1.5rem;"><button class="admin-btn admin-btn-primary" onclick="saveAllProducts()">Save all changes</button></div>
-      </div>
-      <div class="admin-section" id="admin-users">
-        <p class="admin-section-title">All users</p>
-        <table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Joined</th><th>Role</th><th>Actions</th></tr></thead><tbody id="users-table-body"></tbody></table>
-      </div>
-      <div class="admin-section" id="admin-site">
-        <p class="admin-section-title">Site settings</p>
-        <div class="settings-group">
-          <p class="settings-group-title">Hero section</p>
-          <div class="admin-field"><label>Eyebrow text</label><input type="text" id="setting-eyebrow"/></div>
-          <div class="admin-field"><label>Tagline</label><textarea id="setting-tagline" rows="3"></textarea></div>
-        </div>
-        <div class="settings-group">
-          <p class="settings-group-title">Store settings</p>
-          <div class="settings-row"><div><p class="settings-label">Accept orders</p><p class="settings-desc">Show "Add to cart" on products</p></div><label class="toggle"><input type="checkbox" id="toggle-orders"/><span class="toggle-slider"></span></label></div>
-          <div class="settings-row"><div><p class="settings-label">Show newsletter</p><p class="settings-desc">Display the newsletter section</p></div><label class="toggle"><input type="checkbox" id="toggle-newsletter"/><span class="toggle-slider"></span></label></div>
-          <div class="settings-row"><div><p class="settings-label">Maintenance mode</p><p class="settings-desc">Show a banner to visitors</p></div><label class="toggle"><input type="checkbox" id="toggle-maintenance"/><span class="toggle-slider"></span></label></div>
-        </div>
-        <button class="admin-btn admin-btn-primary" onclick="saveSiteSettings()">Save settings</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+<div id="footer-container"></div>
 <div class="toast" id="toast"></div>
-
+<script src="/shared.js"></script>
 <script>
-/* ── UTILS ── */
-function scrollTo2(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
-function showToast(msg, dur=2800){
-  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), dur);
+document.getElementById('nav-container').innerHTML=navHTML('home');
+document.getElementById('footer-container').innerHTML=footerHTML();
+initNav(); initReveal();
+async function loadFeatured(){
+  try{
+    const [products,settings]=await Promise.all([api('GET','/api/products'),api('GET','/api/settings')]);
+    const grid=document.getElementById('featured-grid');
+    const featured=products.slice(0,3);
+    if(!featured.length){grid.innerHTML='<p style="padding:2rem;color:var(--accent);">No products yet.</p>';return;}
+    grid.innerHTML=featured.map(p=>`<div class="product-card"><div class="product-swatch ${p.swatch}"><div class="swatch-soap ${p.soap}"></div></div><p class="product-tag">${p.tag}</p><h3 class="product-name">${p.name}</h3><p class="product-desc">${p.description}</p><div class="product-footer"><span class="product-price">$${parseFloat(p.price).toFixed(2)}</span>${settings.orders!==false?`<button class="add-btn" onclick='addToCart(${JSON.stringify({id:p.id,name:p.name,price:p.price,tag:p.tag,swatch:p.swatch,soap:p.soap})})'>Add to cart</button>`:'<span style="font-size:11px;color:var(--clay);">Unavailable</span>'}</div></div>`).join('');
+    if(settings.eyebrow)document.getElementById('site-eyebrow').textContent=settings.eyebrow;
+    if(settings.tagline)document.getElementById('site-tagline').textContent=settings.tagline;
+  }catch(e){console.error(e);}
 }
-function setBtn(id, txt, disabled){ const b=document.getElementById(id); if(b){b.textContent=txt;b.disabled=disabled;} }
-
-/* ── API HELPER ── */
-async function api(method, path, body){
-  const opts={method, headers:{'Content-Type':'application/json'}, credentials:'include'};
-  if(body) opts.body=JSON.stringify(body);
-  const res=await fetch(path, opts);
-  const data=await res.json();
-  if(!res.ok) throw new Error(data.error||'Something went wrong');
-  return data;
-}
-
-/* ── SESSION ── */
-let currentUser = null;
-
-async function checkSession(){
-  try { currentUser=await api('GET','/api/me'); } catch{ currentUser=null; }
-  updateNavAuth();
-  await loadSettings();
-  await loadProducts();
-}
-
-function updateNavAuth(){
-  const authBtn=document.getElementById('auth-btn');
-  const userMenu=document.getElementById('user-menu');
-  const adminLink=document.getElementById('admin-panel-link');
-  if(currentUser){
-    authBtn.style.display='none';
-    userMenu.style.display='block';
-    const first=currentUser.name.split(' ')[0];
-    document.getElementById('user-btn').textContent=first+(currentUser.isAdmin?' ⚙':'')+' ▾';
-    document.getElementById('dropdown-name').textContent=currentUser.isAdmin?'Administrator':currentUser.email;
-    adminLink.style.display=currentUser.isAdmin?'block':'none';
-  } else {
-    authBtn.style.display='block';
-    userMenu.style.display='none';
-  }
-}
-
-/* ── PRODUCTS ── */
-async function loadProducts(){
-  try {
-    const products=await api('GET','/api/products');
-    const settings=await api('GET','/api/settings');
-    renderProducts(products, settings);
-  } catch(e){ console.error(e); }
-}
-
-function renderProducts(products, settings){
-  const grid=document.getElementById('products-grid');
-  if(!products.length){ grid.innerHTML='<p style="padding:2rem;color:var(--accent);font-size:13px;">No products yet.</p>'; return; }
-  grid.innerHTML=products.map(p=>`
-    <div class="product-card">
-      <div class="product-swatch ${p.swatch}"><div class="swatch-soap ${p.soap}" data-label="LUNARE"></div></div>
-      <p class="product-tag">${p.tag}</p>
-      <h3 class="product-name">${p.name}</h3>
-      <p class="product-desc">${p.description}</p>
-      <div class="product-footer">
-        <span class="product-price">$${parseFloat(p.price).toFixed(2)}</span>
-        ${settings.orders!==false?`<button class="add-btn" onclick="addToCart('${p.name}')">Add to cart</button>`:'<span style="font-size:11px;color:var(--clay);">Unavailable</span>'}
-      </div>
-    </div>
-  `).join('');
-}
-
-function addToCart(name){ showToast(name+' added to cart'); }
-
-/* ── SETTINGS ── */
-async function loadSettings(){
-  try {
-    const s=await api('GET','/api/settings');
-    if(s.eyebrow) document.getElementById('site-eyebrow').textContent=s.eyebrow;
-    if(s.tagline)  document.getElementById('site-tagline').textContent=s.tagline;
-    const nl=document.querySelector('.newsletter');
-    if(nl) nl.style.display=s.newsletter===false?'none':'';
-    if(s.maintenance){
-      if(!document.getElementById('maint-banner')){
-        const b=document.createElement('div'); b.id='maint-banner';
-        b.style='background:#4f46e5;color:#fff;text-align:center;padding:0.7rem;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;';
-        b.textContent='⚠ Maintenance mode is on — visible only to you'; document.body.prepend(b);
-      }
-    } else { document.getElementById('maint-banner')?.remove(); }
-  } catch(e){ console.error(e); }
-}
-
-/* ── NEWSLETTER ── */
 async function subscribe(){
-  const v=document.getElementById('email-input').value.trim();
-  if(!v||!v.includes('@')) return;
-  try {
-    await api('POST','/api/newsletter',{email:v});
-    showToast("You're on the list. Thank you.");
-    document.getElementById('email-input').value='';
-  } catch(e){ showToast(e.message); }
+  const v=document.getElementById('nl-email').value.trim();
+  if(!v||!v.includes('@'))return;
+  try{await api('POST','/api/newsletter',{email:v});showToast("You're on the list!");document.getElementById('nl-email').value='';}
+  catch(e){showToast(e.message);}
 }
-
-/* ── AUTH MODAL ── */
-function openModal(panel){ switchPanel(panel||'login'); document.getElementById('auth-modal').classList.add('open'); document.body.style.overflow='hidden'; }
-function closeModal(){ document.getElementById('auth-modal').classList.remove('open'); document.body.style.overflow=''; clearErrors(); }
-function handleOverlayClick(e){ if(e.target===document.getElementById('auth-modal')) closeModal(); }
-function switchPanel(name){ document.querySelectorAll('.auth-panel').forEach(p=>p.classList.remove('active')); document.getElementById('panel-'+name).classList.add('active'); clearErrors(); }
-function clearErrors(){ document.querySelectorAll('.auth-error').forEach(el=>el.textContent=''); document.querySelectorAll('.auth-field input').forEach(el=>el.classList.remove('error')); }
-function setError(id,msg,inputId){ document.getElementById(id).textContent=msg; if(inputId) document.getElementById(inputId).classList.add('error'); }
-
-async function doLogin(){
-  const username=document.getElementById('login-email').value.trim();
-  const password=document.getElementById('login-pass').value;
-  clearErrors();
-  if(!username){ setError('login-error','Please enter your email.','login-email'); return; }
-  if(!password){ setError('login-error','Please enter your password.','login-pass'); return; }
-  setBtn('login-btn','Signing in…',true);
-  try {
-    currentUser=await api('POST','/api/login',{username,password});
-    updateNavAuth();
-    document.getElementById('success-title').innerHTML='Welcome'+(currentUser.isAdmin?', <em>Nila.</em>':'back.');
-    document.getElementById('success-msg').textContent=currentUser.isAdmin?'You are signed in as administrator.':"You're signed in to your Lunare account.";
-    switchPanel('success');
-    showToast('Signed in as '+currentUser.name);
-  } catch(e){ setError('login-error',e.message,'login-pass'); }
-  setBtn('login-btn','Sign in',false);
-}
-
-async function doSignup(){
-  const name=document.getElementById('signup-name').value.trim();
-  const email=document.getElementById('signup-email').value.trim();
-  const password=document.getElementById('signup-pass').value;
-  const pass2=document.getElementById('signup-pass2').value;
-  clearErrors();
-  if(!name){ setError('signup-error','Please enter your name.','signup-name'); return; }
-  if(!email||!email.includes('@')){ setError('signup-error','Please enter a valid email.','signup-email'); return; }
-  if(password.length<6){ setError('signup-error','Password must be at least 6 characters.','signup-pass'); return; }
-  if(password!==pass2){ setError('signup-error','Passwords do not match.','signup-pass2'); return; }
-  setBtn('signup-btn','Creating account…',true);
-  try {
-    currentUser=await api('POST','/api/signup',{name,email,password});
-    updateNavAuth();
-    document.getElementById('success-title').innerHTML='Welcome, <em>'+name.split(' ')[0]+'.</em>';
-    document.getElementById('success-msg').textContent='Your Lunare account is ready.';
-    switchPanel('success');
-    showToast('Account created — welcome, '+name.split(' ')[0]+'!');
-    ['signup-name','signup-email','signup-pass','signup-pass2'].forEach(id=>document.getElementById(id).value='');
-  } catch(e){ setError('signup-error',e.message,'signup-email'); }
-  setBtn('signup-btn','Create account',false);
-}
-
-function doReset(){
-  const email=document.getElementById('reset-email').value.trim();
-  if(!email||!email.includes('@')){ setError('reset-error','Please enter a valid email.','reset-email'); return; }
-  document.getElementById('success-title').textContent='Check your inbox.';
-  document.getElementById('success-msg').textContent='If that email exists, a reset link is on its way. (Email sending requires an email service setup — see README.)';
-  switchPanel('success');
-}
-
-async function doLogout(){
-  try { await api('POST','/api/logout'); } catch{}
-  currentUser=null; updateNavAuth();
-  document.getElementById('user-dropdown').style.display='none';
-  showToast('Signed out. See you soon.');
-}
-
-function toggleUserMenu(){
-  const d=document.getElementById('user-dropdown');
-  d.style.display=d.style.display==='none'?'block':'none';
-}
-document.addEventListener('click',e=>{ const m=document.getElementById('user-menu'); if(m&&!m.contains(e.target)) document.getElementById('user-dropdown').style.display='none'; });
-
-/* ── ADMIN ── */
-function openAdmin(){ document.getElementById('user-dropdown').style.display='none'; document.getElementById('admin-overlay').classList.add('open'); document.body.style.overflow='hidden'; adminTab('dashboard'); }
-function closeAdmin(){ document.getElementById('admin-overlay').classList.remove('open'); document.body.style.overflow=''; }
-function handleAdminOverlay(e){ if(e.target===document.getElementById('admin-overlay')) closeAdmin(); }
-
-function adminTab(name){
-  document.querySelectorAll('.admin-tab').forEach((t,i)=>{ t.classList.toggle('active',['dashboard','products','users','site'][i]===name); });
-  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('admin-'+name).classList.add('active');
-  if(name==='dashboard') loadDashboard();
-  if(name==='products')  loadProductEditors();
-  if(name==='users')     loadUsersTable();
-  if(name==='site')      loadSiteSettingsForm();
-}
-
-async function loadDashboard(){
-  try {
-    const [users,products,subs]=await Promise.all([api('GET','/api/users'),api('GET','/api/products'),api('GET','/api/newsletter/count')]);
-    document.getElementById('stat-users').textContent=users.length;
-    document.getElementById('stat-products').textContent=products.length;
-    document.getElementById('stat-subs').textContent=subs.count;
-    const tbody=document.getElementById('recent-signups-body');
-    if(!users.length){ tbody.innerHTML='<tr><td colspan="4" style="color:#64748b;padding:1rem;">No users yet.</td></tr>'; return; }
-    tbody.innerHTML=users.slice(0,6).map(u=>`
-      <tr><td>${u.name}</td><td style="color:#94a3b8;">${u.email}</td><td style="color:#64748b;">${new Date(u.created_at).toLocaleDateString()}</td><td><span class="user-role-badge role-user">User</span></td></tr>
-    `).join('');
-  } catch(e){ showToast('Failed to load dashboard: '+e.message); }
-}
-
-let adminProducts=[];
-async function loadProductEditors(){
-  try {
-    adminProducts=await api('GET','/api/products');
-    renderProductEditors();
-  } catch(e){ showToast('Failed to load products: '+e.message); }
-}
-
-function renderProductEditors(){
-  const container=document.getElementById('product-editors');
-  container.innerHTML=adminProducts.map(p=>`
-    <div class="product-editor" id="pe-${p.id}">
-      <div class="product-editor-header" onclick="toggleEditor(${p.id})">
-        <span class="product-editor-title">${p.name} — $${parseFloat(p.price).toFixed(2)}</span>
-        <div style="display:flex;gap:0.5rem;align-items:center;">
-          <button class="admin-btn admin-btn-danger" style="padding:5px 12px;font-size:9px;" onclick="event.stopPropagation();deleteProduct(${p.id})">Delete</button>
-          <span style="color:#64748b;">▾</span>
-        </div>
-      </div>
-      <div class="product-editor-body" id="peb-${p.id}">
-        <div class="admin-row">
-          <div class="admin-field"><label>Product name</label><input type="text" id="p-name-${p.id}" value="${p.name}"/></div>
-          <div class="admin-field"><label>Tag / phase</label><input type="text" id="p-tag-${p.id}" value="${p.tag}"/></div>
-        </div>
-        <div class="admin-row">
-          <div class="admin-field"><label>Price ($)</label><input type="number" id="p-price-${p.id}" value="${parseFloat(p.price).toFixed(2)}" min="0" step="0.01"/></div>
-          <div class="admin-field"><label>Swatch color</label>
-            <select id="p-swatch-${p.id}">
-              <option value="swatch-a" ${p.swatch==='swatch-a'?'selected':''}>Warm sand</option>
-              <option value="swatch-b" ${p.swatch==='swatch-b'?'selected':''}>Sage green</option>
-              <option value="swatch-c" ${p.swatch==='swatch-c'?'selected':''}>Lavender</option>
-            </select>
-          </div>
-        </div>
-        <div class="admin-field"><label>Description</label><textarea id="p-desc-${p.id}">${p.description}</textarea></div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function toggleEditor(id){ document.getElementById('peb-'+id)?.classList.toggle('open'); }
-
-async function saveAllProducts(){
-  const swapMap={'swatch-a':'soap-a','swatch-b':'soap-b','swatch-c':'soap-c'};
-  try {
-    for(const p of adminProducts){
-      const body={
-        tag:document.getElementById('p-tag-'+p.id)?.value||p.tag,
-        name:document.getElementById('p-name-'+p.id)?.value||p.name,
-        description:document.getElementById('p-desc-'+p.id)?.value||p.description,
-        price:parseFloat(document.getElementById('p-price-'+p.id)?.value)||p.price,
-        swatch:document.getElementById('p-swatch-'+p.id)?.value||p.swatch,
-      };
-      body.soap=swapMap[body.swatch]||p.soap;
-      await api('PUT','/api/products/'+p.id, body);
-    }
-    await loadProducts();
-    await loadProductEditors();
-    showToast('All products saved and updated on site');
-  } catch(e){ showToast('Save failed: '+e.message); }
-}
-
-async function addProduct(){
-  try {
-    const p=await api('POST','/api/products',{tag:'New',name:'New soap',description:'Describe your soap here.',price:12,swatch:'swatch-a',soap:'soap-a'});
-    adminProducts.push(p);
-    renderProductEditors();
-    await loadProducts();
-    showToast('New product added — edit and save.');
-    setTimeout(()=>document.getElementById('peb-'+p.id)?.classList.add('open'),100);
-  } catch(e){ showToast('Failed: '+e.message); }
-}
-
-async function deleteProduct(id){
-  if(!confirm('Delete this product?')) return;
-  try {
-    await api('DELETE','/api/products/'+id);
-    adminProducts=adminProducts.filter(p=>p.id!==id);
-    renderProductEditors();
-    await loadProducts();
-    showToast('Product deleted.');
-  } catch(e){ showToast('Delete failed: '+e.message); }
-}
-
-async function loadUsersTable(){
-  try {
-    const users=await api('GET','/api/users');
-    const tbody=document.getElementById('users-table-body');
-    if(!users.length){ tbody.innerHTML='<tr><td colspan="5" style="color:#64748b;padding:1rem;">No registered users yet.</td></tr>'; return; }
-    tbody.innerHTML=users.map(u=>`
-      <tr><td>${u.name}</td><td style="color:#94a3b8;">${u.email}</td><td style="color:#64748b;">${new Date(u.created_at).toLocaleDateString()}</td><td><span class="user-role-badge role-user">User</span></td>
-      <td><button class="admin-btn admin-btn-danger" style="padding:4px 10px;font-size:9px;" onclick="deleteUser(${u.id})">Delete</button></td></tr>
-    `).join('');
-  } catch(e){ showToast('Failed to load users: '+e.message); }
-}
-
-async function deleteUser(id){
-  if(!confirm('Delete this user?')) return;
-  try { await api('DELETE','/api/users/'+id); await loadUsersTable(); showToast('User deleted.'); }
-  catch(e){ showToast('Delete failed: '+e.message); }
-}
-
-async function loadSiteSettingsForm(){
-  try {
-    const s=await api('GET','/api/settings');
-    document.getElementById('setting-eyebrow').value=s.eyebrow||'';
-    document.getElementById('setting-tagline').value=s.tagline||'';
-    document.getElementById('toggle-orders').checked=s.orders!==false;
-    document.getElementById('toggle-newsletter').checked=s.newsletter!==false;
-    document.getElementById('toggle-maintenance').checked=!!s.maintenance;
-  } catch(e){ showToast('Failed to load settings: '+e.message); }
-}
-
-async function saveSiteSettings(){
-  const s={
-    eyebrow:document.getElementById('setting-eyebrow').value,
-    tagline:document.getElementById('setting-tagline').value,
-    orders:document.getElementById('toggle-orders').checked,
-    newsletter:document.getElementById('toggle-newsletter').checked,
-    maintenance:document.getElementById('toggle-maintenance').checked,
-  };
-  try {
-    await api('PUT','/api/settings',s);
-    await loadSettings();
-    await loadProducts();
-    showToast('Site settings saved.');
-  } catch(e){ showToast('Save failed: '+e.message); }
-}
-
-/* ── SCROLL REVEAL ── */
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeModal();closeAdmin();} });
-
-checkSession();
+loadFeatured();
 </script>
 </body>
 </html>
