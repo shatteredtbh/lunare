@@ -1,0 +1,93 @@
+/* shared.css — Lunare design system */
+:root {
+  --cream:#F5F0E8; --bone:#EDE7D9; --sand:#D6CBBA; --clay:#B8A898;
+  --dusk:#5C4F42; --night:#1E1A16; --moon:#F9F6F0; --accent:#8C7B6A;
+  --admin:#1a1f2e; --admin2:#252b3b; --admin3:#2f3650; --adminac:#7c8cf8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--night);font-family:'Lato',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:var(--cream);border-bottom:1px solid var(--sand);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;letter-spacing:0.25em;color:var(--night);text-decoration:none;}
+.nav-logo span{font-style:italic;}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);text-decoration:none;transition:color 0.2s;cursor:pointer;}
+.nav-links a:hover,.nav-links a.active{color:var(--night);}
+.nav-right{display:flex;gap:0.8rem;align-items:center;}
+.nav-cta{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:8px 20px;border:1px solid var(--dusk);background:transparent;color:var(--dusk);cursor:pointer;transition:all 0.2s;font-family:'Lato',sans-serif;}
+.nav-cta:hover{background:var(--dusk);color:var(--cream);}
+.cart-btn{position:relative;background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center;gap:6px;font-family:'Lato',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);transition:color 0.2s;}
+.cart-btn:hover{color:var(--night);}
+.cart-count{background:var(--dusk);color:var(--cream);border-radius:50%;width:18px;height:18px;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:400;}
+.cart-count.hidden{display:none;}
+
+/* BUTTONS */
+.btn-primary{padding:13px 32px;background:var(--night);color:var(--cream);border:none;font-family:'Lato',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
+.btn-primary:hover{background:var(--dusk);}
+.btn-primary:disabled{opacity:0.6;cursor:not-allowed;}
+.btn-ghost{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);cursor:pointer;border:none;background:none;text-decoration:underline;text-underline-offset:4px;transition:color 0.2s;font-family:'Lato',sans-serif;}
+.btn-ghost:hover{color:var(--night);}
+
+/* TICKER */
+.ticker{overflow:hidden;padding:0.65rem 0;background:var(--night);color:var(--sand);}
+.ticker-inner{display:flex;gap:4rem;width:max-content;animation:ticker 22s linear infinite;}
+.ticker-inner span{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;white-space:nowrap;}
+.ticker-inner span.sep{color:var(--accent);}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--night);color:var(--cream);padding:14px 24px;border-radius:4px;font-size:12px;letter-spacing:0.1em;transform:translateY(80px);opacity:0;transition:all 0.35s ease;z-index:9999;max-width:300px;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* FOOTER */
+footer{padding:3rem 3rem 2rem;background:var(--night);color:var(--clay);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;border-top:1px solid #2a2520;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:0.25em;color:var(--moon);margin-bottom:0.8rem;}
+.footer-tagline{font-size:12px;color:var(--accent);line-height:1.7;max-width:220px;}
+.footer-col h4{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--moon);margin-bottom:1.2rem;font-weight:400;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
+.footer-col a{font-size:13px;color:var(--accent);text-decoration:none;cursor:pointer;transition:color 0.2s;}
+.footer-col a:hover{color:var(--cream);}
+.footer-bottom{padding:1.2rem 3rem;background:var(--night);border-top:1px solid #2a2520;display:flex;justify-content:space-between;}
+.footer-bottom p{font-size:11px;color:var(--accent);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* USER DROPDOWN */
+.user-dropdown-wrap{position:relative;}
+.user-dropdown{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--cream);border:1px solid var(--sand);min-width:190px;z-index:200;}
+.user-dropdown a{display:block;padding:0.8rem 1.2rem;font-size:12px;color:var(--accent);cursor:pointer;border-bottom:1px solid var(--sand);}
+.user-dropdown a:last-child{border-bottom:none;}
+.user-dropdown a:hover{background:var(--bone);}
+.user-dropdown-header{padding:1rem 1.2rem;border-bottom:1px solid var(--sand);}
+.user-dropdown-header p:first-child{font-size:11px;color:var(--clay);margin-bottom:2px;}
+.user-dropdown-header p:last-child{font-size:13px;color:var(--night);}
+
+/* SECTION BASICS */
+.section-eyebrow{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--night);}
+
+/* PRODUCT CARDS */
+.product-card{background:var(--cream);padding:1.8rem 1.6rem 2rem;cursor:pointer;transition:background 0.2s;position:relative;overflow:hidden;}
+.product-card::after{content:'';position:absolute;bottom:0;left:0;height:2px;width:0;background:var(--dusk);transition:width 0.3s ease;}
+.product-card:hover::after{width:100%;}
+.product-card:hover{background:var(--moon);}
+.product-swatch{width:100%;height:150px;border-radius:4px;margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;}
+.swatch-a{background:#E8E0D5;}.swatch-b{background:#D8E5DF;}.swatch-c{background:#E5DCE8;}
+.swatch-soap{width:68px;height:42px;border-radius:6px;border:1px solid rgba(255,255,255,0.6);position:relative;}
+.swatch-soap::after{content:'LUNARE';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:8px;letter-spacing:0.15em;color:var(--dusk);}
+.soap-a{background:#F0EAE0;}.soap-b{background:#C8DDD5;}.soap-c{background:#D8CFE0;}
+.product-tag{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:0.5rem;color:var(--night);}
+.product-desc{font-size:12px;color:var(--accent);line-height:1.7;margin-bottom:1rem;}
+.product-footer{display:flex;justify-content:space-between;align-items:center;}
+.product-price{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--night);}
+.add-btn{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:7px 14px;border:1px solid var(--dusk);background:transparent;color:var(--dusk);cursor:pointer;transition:all 0.2s;font-family:'Lato',sans-serif;}
+.add-btn:hover{background:var(--dusk);color:var(--cream);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
