@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Order confirmed — Lunare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/shared.css"/>
+<style>
+.success-page{min-height:70vh;display:flex;align-items:center;justify-content:center;padding:4rem 2rem;border-bottom:1px solid var(--sand);}
+.success-box{max-width:520px;text-align:center;}
+.success-icon{width:64px;height:64px;border-radius:50%;border:1px solid var(--sand);margin:0 auto 2rem;display:flex;align-items:center;justify-content:center;animation:fadeIn 0.6s ease both;}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;margin-bottom:1rem;animation:fadeUp 0.8s ease both;}
+.success-title em{font-style:italic;color:var(--dusk);}
+.success-sub{font-size:15px;color:var(--accent);line-height:1.8;margin-bottom:2.5rem;animation:fadeUp 1s ease both;}
+.success-actions{display:flex;gap:1rem;justify-content:center;animation:fadeUp 1.2s ease both;}
+</style>
+</head>
+<body>
+<div id="nav-container"></div>
+<div class="success-page">
+  <div class="success-box">
+    <div class="success-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--dusk)" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1 class="success-title">Order <em>confirmed.</em></h1>
+    <p class="success-sub">Thank you for your order! You'll receive a confirmation email shortly. Every bar is made to order — we'll let you know when yours ships.</p>
+    <div class="success-actions">
+      <button class="btn-primary" onclick="window.location.href='/shop'">Keep shopping</button>
+      <button class="btn-ghost" onclick="window.location.href='/'">Back to home</button>
+    </div>
+  </div>
+</div>
+<div id="footer-container"></div>
+<script src="/shared.js"></script>
+<script>
+document.getElementById('nav-container').innerHTML=navHTML('');
+document.getElementById('footer-container').innerHTML=footerHTML();
+clearCart();
+initNav();
+</script>
+</body>
+</html>
