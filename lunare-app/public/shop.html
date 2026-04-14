@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shop — Lunare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/shared.css"/>
+<style>
+.shop-hero{padding:4rem 3rem;border-bottom:1px solid var(--sand);}
+.shop-hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;line-height:1.1;margin-bottom:0.5rem;}
+.shop-hero h1 em{font-style:italic;color:var(--dusk);}
+.shop-hero p{font-size:14px;color:var(--accent);}
+.shop-controls{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;border-bottom:1px solid var(--sand);background:var(--moon);}
+.filter-tags{display:flex;gap:0.6rem;flex-wrap:wrap;}
+.filter-tag{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:6px 14px;border:1px solid var(--sand);background:transparent;color:var(--accent);cursor:pointer;transition:all 0.2s;font-family:'Lato',sans-serif;}
+.filter-tag:hover,.filter-tag.active{background:var(--dusk);color:var(--cream);border-color:var(--dusk);}
+.sort-select{font-size:11px;letter-spacing:0.1em;padding:7px 12px;border:1px solid var(--sand);background:var(--cream);color:var(--accent);font-family:'Lato',sans-serif;cursor:pointer;outline:none;}
+.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--sand);border-bottom:1px solid var(--sand);}
+.product-count{font-size:11px;color:var(--clay);letter-spacing:0.1em;}
+.empty-state{padding:5rem;text-align:center;grid-column:1/-1;}
+.empty-state p{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--accent);}
+</style>
+</head>
+<body>
+<div id="nav-container"></div>
+<section class="shop-hero">
+  <p class="section-eyebrow">The collection</p>
+  <h1>Every bar, <em>crafted.</em></h1>
+  <p>Small batch. Handmade. Honest ingredients.</p>
+</section>
+<div class="shop-controls">
+  <div class="filter-tags">
+    <button class="filter-tag active" onclick="setFilter('all',this)">All</button>
+    <button class="filter-tag" onclick="setFilter('New moon',this)">New moon</button>
+    <button class="filter-tag" onclick="setFilter('Full moon',this)">Full moon</button>
+    <button class="filter-tag" onclick="setFilter('Crescent',this)">Crescent</button>
+    <button class="filter-tag" onclick="setFilter('Waning',this)">Waning</button>
+    <button class="filter-tag" onclick="setFilter('Waxing',this)">Waxing</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <span class="product-count" id="product-count"></span>
+    <select class="sort-select" onchange="setSort(this.value)">
+      <option value="default">Sort: Featured</option>
+      <option value="price-asc">Price: Low to high</option>
+      <option value="price-desc">Price: High to low</option>
+      <option value="name">Name: A–Z</option>
+    </select>
+  </div>
+</div>
+<div class="shop-grid" id="shop-grid"><p style="padding:3rem;color:var(--accent);font-size:13px;grid-column:1/-1;">Loading...</p></div>
+<div id="footer-container"></div>
+<div class="toast" id="toast"></div>
+<script src="/shared.js"></script>
+<script>
+document.getElementById('nav-container').innerHTML=navHTML('shop');
+document.getElementById('footer-container').innerHTML=footerHTML();
+initNav();
+let allProducts=[],currentFilter='all',currentSort='default',ordersEnabled=true;
+async function loadShop(){
+  try{
+    const [products,settings]=await Promise.all([api('GET','/api/products'),api('GET','/api/settings')]);
+    allProducts=products;
+    ordersEnabled=settings.orders!==false;
+    renderShop();
+  }catch(e){document.getElementById('shop-grid').innerHTML='<p style="padding:3rem;color:var(--accent);grid-column:1/-1;">Failed to load products.</p>';}
+}
+function setFilter(f,el){
+  currentFilter=f;
+  document.querySelectorAll('.filter-tag').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderShop();
+}
+function setSort(s){currentSort=s;renderShop();}
+function renderShop(){
+  let products=[...allProducts];
+  if(currentFilter!=='all') products=products.filter(p=>p.tag===currentFilter);
+  if(currentSort==='price-asc') products.sort((a,b)=>parseFloat(a.price)-parseFloat(b.price));
+  else if(currentSort==='price-desc') products.sort((a,b)=>parseFloat(b.price)-parseFloat(a.price));
+  else if(currentSort==='name') products.sort((a,b)=>a.name.localeCompare(b.name));
+  document.getElementById('product-count').textContent=products.length+' product'+(products.length!==1?'s':'');
+  const grid=document.getElementById('shop-grid');
+  if(!products.length){grid.innerHTML='<div class="empty-state"><p>No products in this category yet.</p></div>';return;}
+  grid.innerHTML=products.map(p=>`<div class="product-card"><div class="product-swatch ${p.swatch}"><div class="swatch-soap ${p.soap}"></div></div><p class="product-tag">${p.tag}</p><h3 class="product-name">${p.name}</h3><p class="product-desc">${p.description}</p><div class="product-footer"><span class="product-price">$${parseFloat(p.price).toFixed(2)}</span>${ordersEnabled?`<button class="add-btn" onclick='addToCart(${JSON.stringify({id:p.id,name:p.name,price:p.price,tag:p.tag,swatch:p.swatch,soap:p.soap})})'>Add to cart</button>`:'<span style="font-size:11px;color:var(--clay);">Unavailable</span>'}</div></div>`).join('');
+}
+loadShop();
+</script>
+</body>
+</html>
