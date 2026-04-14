@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Lunare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/shared.css"/>
+<style>
+body{background:var(--admin);}
+.admin-layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh;}
+.admin-sidebar{background:var(--admin2);border-right:1px solid var(--admin3);padding:2rem 0;}
+.admin-sidebar-logo{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:0.2em;color:#fff;padding:0 1.5rem 1.5rem;border-bottom:1px solid var(--admin3);margin-bottom:1.5rem;}
+.admin-sidebar-logo span{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;background:var(--adminac);color:#fff;padding:2px 7px;border-radius:3px;margin-left:0.5rem;vertical-align:middle;}
+.admin-nav a{display:block;padding:0.8rem 1.5rem;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#64748b;text-decoration:none;cursor:pointer;transition:all 0.2s;border-left:2px solid transparent;}
+.admin-nav a:hover{color:#e2e8f0;background:var(--admin3);}
+.admin-nav a.active{color:var(--adminac);border-left-color:var(--adminac);background:rgba(124,140,248,0.08);}
+.admin-nav a.back{color:#64748b;margin-top:2rem;border-top:1px solid var(--admin3);padding-top:1rem;}
+.admin-main{padding:2.5rem;overflow-y:auto;color:#e2e8f0;}
+.admin-section{display:none;}
+.admin-section.active{display:block;}
+.admin-section-title{font-size:18px;font-weight:400;color:#fff;margin-bottom:1.5rem;padding-bottom:0.8rem;border-bottom:1px solid var(--admin3);}
+.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;}
+.admin-stat{background:var(--admin2);border:1px solid var(--admin3);border-radius:6px;padding:1.2rem;}
+.admin-stat-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#64748b;margin-bottom:0.4rem;}
+.admin-stat-val{font-size:28px;font-weight:400;color:#fff;}
+.product-editor{background:var(--admin2);border:1px solid var(--admin3);border-radius:6px;margin-bottom:1rem;overflow:hidden;}
+.product-editor-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;cursor:pointer;transition:background 0.2s;}
+.product-editor-header:hover{background:var(--admin3);}
+.product-editor-body{padding:1.2rem;border-top:1px solid var(--admin3);display:none;}
+.product-editor-body.open{display:block;}
+.admin-field{margin-bottom:1rem;}
+.admin-field label{display:block;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#64748b;margin-bottom:6px;}
+.admin-field input,.admin-field textarea,.admin-field select{width:100%;padding:9px 12px;background:var(--admin);border:1px solid var(--admin3);color:#e2e8f0;font-family:'Lato',sans-serif;font-size:13px;border-radius:4px;outline:none;transition:border-color 0.2s;}
+.admin-field input:focus,.admin-field textarea:focus{border-color:var(--adminac);}
+.admin-field textarea{resize:vertical;min-height:70px;}
+.admin-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.admin-btn{padding:8px 18px;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;font-family:'Lato',sans-serif;transition:all 0.2s;}
+.admin-btn-primary{background:var(--adminac);color:#fff;}
+.admin-btn-primary:hover{background:#6366f1;}
+.admin-btn-danger{background:#ef4444;color:#fff;}
+.admin-btn-danger:hover{background:#dc2626;}
+.add-product-btn{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;padding:1rem;border:1px dashed var(--admin3);border-radius:6px;background:transparent;color:#64748b;cursor:pointer;font-family:'Lato',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s;margin-bottom:1rem;}
+.add-product-btn:hover{border-color:var(--adminac);color:var(--adminac);}
+.admin-table{width:100%;border-collapse:collapse;font-size:13px;}
+.admin-table th{text-align:left;padding:0.7rem 1rem;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#64748b;border-bottom:1px solid var(--admin3);font-weight:400;}
+.admin-table td{padding:0.8rem 1rem;border-bottom:1px solid var(--admin3);color:#e2e8f0;}
+.admin-table tr:hover td{background:var(--admin2);}
+.badge{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;}
+.badge-user{background:var(--admin3);color:#94a3b8;}
+.badge-pending{background:#854f0b;color:#fac775;}
+.badge-paid{background:#085041;color:#9fe1cb;}
+.settings-group{background:var(--admin2);border:1px solid var(--admin3);border-radius:6px;padding:1.5rem;margin-bottom:1.5rem;}
+.settings-group-title{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--adminac);margin-bottom:1.2rem;}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:0.8rem 0;border-bottom:1px solid var(--admin3);}
+.settings-row:last-child{border-bottom:none;}
+.settings-label{font-size:13px;color:#e2e8f0;}
+.settings-desc{font-size:11px;color:#64748b;margin-top:2px;}
+.toggle{position:relative;width:40px;height:22px;cursor:pointer;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:var(--admin3);border-radius:22px;transition:0.3s;}
+.toggle-slider::before{content:'';position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#64748b;border-radius:50%;transition:0.3s;}
+.toggle input:checked+.toggle-slider{background:var(--adminac);}
+.toggle input:checked+.toggle-slider::before{transform:translateX(18px);background:#fff;}
+</style>
+</head>
+<body>
+<div class="admin-layout">
+  <div class="admin-sidebar">
+    <div class="admin-sidebar-logo">LUNARE <span>Admin</span></div>
+    <nav class="admin-nav">
+      <a class="active" onclick="adminTab('dashboard',this)">Dashboard</a>
+      <a onclick="adminTab('products',this)">Products</a>
+      <a onclick="adminTab('orders',this)">Orders</a>
+      <a onclick="adminTab('users',this)">Users</a>
+      <a onclick="adminTab('site',this)">Site settings</a>
+      <a class="back" href="/" onclick="">← Back to site</a>
+    </nav>
+  </div>
+  <div class="admin-main">
+    <div class="admin-section active" id="admin-dashboard">
+      <p class="admin-section-title">Dashboard</p>
+      <div class="admin-grid">
+        <div class="admin-stat"><p class="admin-stat-label">Users</p><p class="admin-stat-val" id="stat-users">—</p></div>
+        <div class="admin-stat"><p class="admin-stat-label">Products</p><p class="admin-stat-val" id="stat-products">—</p></div>
+        <div class="admin-stat"><p class="admin-stat-label">Orders</p><p class="admin-stat-val" id="stat-orders">—</p></div>
+        <div class="admin-stat"><p class="admin-stat-label">Newsletter</p><p class="admin-stat-val" id="stat-subs">—</p></div>
+      </div>
+      <p class="admin-section-title">Recent orders</p>
+      <table class="admin-table"><thead><tr><th>Customer</th><th>Email</th><th>Total</th><th>Status</th><th>Date</th></tr></thead><tbody id="orders-preview"></tbody></table>
+    </div>
+    <div class="admin-section" id="admin-products">
+      <p class="admin-section-title">Products</p>
+      <button class="add-product-btn" onclick="addProduct()">+ Add new product</button>
+      <div id="product-editors"></div>
+      <div style="margin-top:1.5rem;"><button class="admin-btn admin-btn-primary" onclick="saveAllProducts()">Save all changes</button></div>
+    </div>
+    <div class="admin-section" id="admin-orders">
+      <p class="admin-section-title">All orders</p>
+      <table class="admin-table"><thead><tr><th>Customer</th><th>Email</th><th>Items</th><th>Total</th><th>Status</th><th>Date</th></tr></thead><tbody id="orders-table"></tbody></table>
+    </div>
+    <div class="admin-section" id="admin-users">
+      <p class="admin-section-title">Users</p>
+      <table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Joined</th><th>Role</th><th>Actions</th></tr></thead><tbody id="users-table"></tbody></table>
+    </div>
+    <div class="admin-section" id="admin-site">
+      <p class="admin-section-title">Site settings</p>
+      <div class="settings-group">
+        <p class="settings-group-title">Hero section</p>
+        <div class="admin-field"><label>Eyebrow text</label><input type="text" id="s-eyebrow"/></div>
+        <div class="admin-field"><label>Tagline</label><textarea id="s-tagline" rows="3"></textarea></div>
+      </div>
+      <div class="settings-group">
+        <p class="settings-group-title">Store</p>
+        <div class="settings-row"><div><p class="settings-label">Accept orders</p><p class="settings-desc">Show "Add to cart" on products</p></div><label class="toggle"><input type="checkbox" id="t-orders"/><span class="toggle-slider"></span></label></div>
+        <div class="settings-row"><div><p class="settings-label">Show newsletter</p><p class="settings-desc">Display newsletter section</p></div><label class="toggle"><input type="checkbox" id="t-newsletter"/><span class="toggle-slider"></span></label></div>
+        <div class="settings-row"><div><p class="settings-label">Maintenance mode</p><p class="settings-desc">Show maintenance banner</p></div><label class="toggle"><input type="checkbox" id="t-maintenance"/><span class="toggle-slider"></span></label></div>
+      </div>
+      <button class="admin-btn admin-btn-primary" onclick="saveSettings()">Save settings</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="/shared.js"></script>
+<script>
+async function checkAdmin(){
+  try{
+    const user=await api('GET','/api/me');
+    if(!user.isAdmin){window.location.href='/login';return;}
+  }catch{window.location.href='/login';return;}
+  loadDashboard();
+}
+function adminTab(name,el){
+  document.querySelectorAll('.admin-nav a').forEach(a=>a.classList.remove('active'));
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('admin-'+name).classList.add('active');
+  if(name==='dashboard') loadDashboard();
+  if(name==='products')  loadProductEditors();
+  if(name==='orders')    loadOrders();
+  if(name==='users')     loadUsers();
+  if(name==='site')      loadSiteSettings();
+}
+async function loadDashboard(){
+  try{
+    const [users,products,orders,subs]=await Promise.all([api('GET','/api/users'),api('GET','/api/products'),api('GET','/api/orders'),api('GET','/api/newsletter/count')]);
+    document.getElementById('stat-users').textContent=users.length;
+    document.getElementById('stat-products').textContent=products.length;
+    document.getElementById('stat-orders').textContent=orders.length;
+    document.getElementById('stat-subs').textContent=subs.count;
+    const tbody=document.getElementById('orders-preview');
+    if(!orders.length){tbody.innerHTML='<tr><td colspan="5" style="color:#64748b;padding:1rem;">No orders yet.</td></tr>';return;}
+    tbody.innerHTML=orders.slice(0,5).map(o=>`<tr><td>${o.customer_name||'—'}</td><td style="color:#94a3b8;">${o.customer_email||'—'}</td><td>$${parseFloat(o.total||0).toFixed(2)}</td><td><span class="badge ${o.status==='paid'?'badge-paid':'badge-pending'}">${o.status}</span></td><td style="color:#64748b;">${new Date(o.created_at).toLocaleDateString()}</td></tr>`).join('');
+  }catch(e){showToast('Error: '+e.message);}
+}
+let adminProducts=[];
+async function loadProductEditors(){
+  try{adminProducts=await api('GET','/api/products');renderProductEditors();}
+  catch(e){showToast('Error: '+e.message);}
+}
+function renderProductEditors(){
+  document.getElementById('product-editors').innerHTML=adminProducts.map(p=>`
+    <div class="product-editor"><div class="product-editor-header" onclick="document.getElementById('peb-${p.id}').classList.toggle('open')">
+      <span style="font-size:14px;color:#e2e8f0;">${p.name} — $${parseFloat(p.price).toFixed(2)}</span>
+      <div style="display:flex;gap:0.5rem;"><button class="admin-btn admin-btn-danger" style="padding:5px 12px;font-size:9px;" onclick="event.stopPropagation();deleteProduct(${p.id})">Delete</button><span style="color:#64748b;">▾</span></div>
+    </div>
+    <div class="product-editor-body" id="peb-${p.id}">
+      <div class="admin-row">
+        <div class="admin-field"><label>Name</label><input type="text" id="p-name-${p.id}" value="${p.name}"/></div>
+        <div class="admin-field"><label>Tag / phase</label><input type="text" id="p-tag-${p.id}" value="${p.tag}"/></div>
+      </div>
+      <div class="admin-row">
+        <div class="admin-field"><label>Price ($)</label><input type="number" id="p-price-${p.id}" value="${parseFloat(p.price).toFixed(2)}" min="0" step="0.01"/></div>
+        <div class="admin-field"><label>Swatch</label>
+          <select id="p-swatch-${p.id}">
+            <option value="swatch-a" ${p.swatch==='swatch-a'?'selected':''}>Warm sand</option>
+            <option value="swatch-b" ${p.swatch==='swatch-b'?'selected':''}>Sage green</option>
+            <option value="swatch-c" ${p.swatch==='swatch-c'?'selected':''}>Lavender</option>
+          </select>
+        </div>
+      </div>
+      <div class="admin-field"><label>Description</label><textarea id="p-desc-${p.id}">${p.description}</textarea></div>
+    </div></div>
+  `).join('');
+}
+async function saveAllProducts(){
+  const swapMap={'swatch-a':'soap-a','swatch-b':'soap-b','swatch-c':'soap-c'};
+  try{
+    for(const p of adminProducts){
+      const swatch=document.getElementById('p-swatch-'+p.id)?.value||p.swatch;
+      await api('PUT','/api/products/'+p.id,{
+        tag:document.getElementById('p-tag-'+p.id)?.value||p.tag,
+        name:document.getElementById('p-name-'+p.id)?.value||p.name,
+        description:document.getElementById('p-desc-'+p.id)?.value||p.description,
+        price:parseFloat(document.getElementById('p-price-'+p.id)?.value)||p.price,
+        swatch,soap:swapMap[swatch]||p.soap,
+      });
+    }
+    showToast('Products saved!');
+    loadProductEditors();
+  }catch(e){showToast('Error: '+e.message);}
+}
+async function addProduct(){
+  try{
+    const p=await api('POST','/api/products',{tag:'New',name:'New soap',description:'Describe this soap.',price:12,swatch:'swatch-a',soap:'soap-a'});
+    adminProducts.push(p);renderProductEditors();showToast('Product added.');
+    setTimeout(()=>document.getElementById('peb-'+p.id)?.classList.add('open'),100);
+  }catch(e){showToast('Error: '+e.message);}
+}
+async function deleteProduct(id){
+  if(!confirm('Delete this product?'))return;
+  try{await api('DELETE','/api/products/'+id);adminProducts=adminProducts.filter(p=>p.id!==id);renderProductEditors();showToast('Deleted.');}
+  catch(e){showToast('Error: '+e.message);}
+}
+async function loadOrders(){
+  try{
+    const orders=await api('GET','/api/orders');
+    const tbody=document.getElementById('orders-table');
+    if(!orders.length){tbody.innerHTML='<tr><td colspan="6" style="color:#64748b;padding:1rem;">No orders yet.</td></tr>';return;}
+    tbody.innerHTML=orders.map(o=>{
+      const items=o.items?JSON.parse(typeof o.items==='string'?o.items:JSON.stringify(o.items)):[];
+      return`<tr><td>${o.customer_name||'—'}</td><td style="color:#94a3b8;">${o.customer_email||'—'}</td><td style="color:#94a3b8;">${items.length} item${items.length!==1?'s':''}</td><td>$${parseFloat(o.total||0).toFixed(2)}</td><td><span class="badge ${o.status==='paid'?'badge-paid':'badge-pending'}">${o.status}</span></td><td style="color:#64748b;">${new Date(o.created_at).toLocaleDateString()}</td></tr>`;
+    }).join('');
+  }catch(e){showToast('Error: '+e.message);}
+}
+async function loadUsers(){
+  try{
+    const users=await api('GET','/api/users');
+    const tbody=document.getElementById('users-table');
+    if(!users.length){tbody.innerHTML='<tr><td colspan="5" style="color:#64748b;padding:1rem;">No users yet.</td></tr>';return;}
+    tbody.innerHTML=users.map(u=>`<tr><td>${u.name}</td><td style="color:#94a3b8;">${u.email}</td><td style="color:#64748b;">${new Date(u.created_at).toLocaleDateString()}</td><td><span class="badge badge-user">User</span></td><td><button class="admin-btn admin-btn-danger" style="padding:4px 10px;font-size:9px;" onclick="deleteUser(${u.id})">Delete</button></td></tr>`).join('');
+  }catch(e){showToast('Error: '+e.message);}
+}
+async function deleteUser(id){
+  if(!confirm('Delete this user?'))return;
+  try{await api('DELETE','/api/users/'+id);loadUsers();showToast('User deleted.');}
+  catch(e){showToast('Error: '+e.message);}
+}
+async function loadSiteSettings(){
+  try{
+    const s=await api('GET','/api/settings');
+    document.getElementById('s-eyebrow').value=s.eyebrow||'';
+    document.getElementById('s-tagline').value=s.tagline||'';
+    document.getElementById('t-orders').checked=s.orders!==false;
+    document.getElementById('t-newsletter').checked=s.newsletter!==false;
+    document.getElementById('t-maintenance').checked=!!s.maintenance;
+  }catch(e){showToast('Error: '+e.message);}
+}
+async function saveSettings(){
+  try{
+    await api('PUT','/api/settings',{
+      eyebrow:document.getElementById('s-eyebrow').value,
+      tagline:document.getElementById('s-tagline').value,
+      orders:document.getElementById('t-orders').checked,
+      newsletter:document.getElementById('t-newsletter').checked,
+      maintenance:document.getElementById('t-maintenance').checked,
+    });
+    showToast('Settings saved!');
+  }catch(e){showToast('Error: '+e.message);}
+}
+checkAdmin();
+</script>
+</body>
+</html>
