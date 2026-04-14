@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Checkout — Lunare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/shared.css"/>
+<style>
+.checkout-page{display:grid;grid-template-columns:1fr 380px;min-height:80vh;}
+.checkout-form{padding:3rem;border-right:1px solid var(--sand);}
+.checkout-title{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;margin-bottom:2.5rem;}
+.checkout-title em{font-style:italic;color:var(--dusk);}
+.form-section{margin-bottom:2.5rem;}
+.form-section-title{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid var(--bone);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-field{margin-bottom:1rem;}
+.form-field.full{grid-column:1/-1;}
+.form-field label{display:block;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.form-field input{width:100%;padding:11px 14px;border:1px solid var(--sand);background:var(--moon);font-family:'Lato',sans-serif;font-size:14px;font-weight:300;color:var(--night);outline:none;transition:border-color 0.2s;}
+.form-field input:focus{border-color:var(--dusk);}
+.account-box{background:var(--bone);border:1px solid var(--sand);padding:1.5rem;margin-top:1.5rem;}
+.account-box-title{font-size:13px;font-weight:400;color:var(--night);margin-bottom:0.4rem;}
+.account-box-sub{font-size:12px;color:var(--accent);margin-bottom:1rem;}
+.checkbox-row{display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;cursor:pointer;}
+.checkbox-row input[type=checkbox]{width:16px;height:16px;accent-color:var(--dusk);cursor:pointer;}
+.checkbox-row span{font-size:13px;color:var(--night);}
+.checkout-summary{padding:3rem;background:var(--bone);}
+.checkout-summary-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:1.5rem;}
+.checkout-item{display:flex;justify-content:space-between;align-items:center;padding:0.8rem 0;border-bottom:1px solid var(--sand);font-size:13px;}
+.checkout-item-name{color:var(--night);}
+.checkout-item-meta{font-size:11px;color:var(--accent);}
+.checkout-item-price{color:var(--night);font-family:'Cormorant Garamond',serif;font-size:16px;}
+.checkout-total-row{display:flex;justify-content:space-between;padding-top:1rem;margin-top:0.5rem;}
+.checkout-total-label{font-size:13px;color:var(--accent);}
+.checkout-total-val{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--night);}
+.stripe-btn{width:100%;padding:15px;background:var(--night);color:var(--cream);border:none;font-family:'Lato',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;margin-top:2rem;}
+.stripe-btn:hover{background:var(--dusk);}
+.stripe-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.stripe-note{font-size:11px;color:var(--clay);text-align:center;margin-top:0.8rem;line-height:1.6;}
+.error-msg{font-size:12px;color:#c0392b;margin-top:0.5rem;min-height:18px;}
+</style>
+</head>
+<body>
+<div id="nav-container"></div>
+<div class="checkout-page">
+  <div class="checkout-form">
+    <h1 class="checkout-title">Almost <em>there.</em></h1>
+    <div class="form-section">
+      <p class="form-section-title">Contact</p>
+      <div class="form-grid">
+        <div class="form-field"><label>First name</label><input type="text" id="f-name" placeholder="Luna"/></div>
+        <div class="form-field"><label>Last name</label><input type="text" id="f-lastname" placeholder="Moon"/></div>
+        <div class="form-field full"><label>Email</label><input type="email" id="f-email" placeholder="your@email.com"/></div>
+      </div>
+    </div>
+    <div class="account-box">
+      <p class="account-box-title">Create an account?</p>
+      <p class="account-box-sub">Save your details for faster checkout next time. Completely optional.</p>
+      <label class="checkbox-row"><input type="checkbox" id="create-account" onchange="togglePassword()"/><span>Yes, create a Lunare account for me</span></label>
+      <div id="password-field" style="display:none;">
+        <div class="form-field"><label>Choose a password</label><input type="password" id="f-password" placeholder="At least 6 characters"/></div>
+      </div>
+    </div>
+    <div class="error-msg" id="checkout-error"></div>
+  </div>
+  <div class="checkout-summary">
+    <h2 class="checkout-summary-title">Order summary</h2>
+    <div id="checkout-items"></div>
+    <div class="checkout-total-row"><span class="checkout-total-label">Total (USD)</span><span class="checkout-total-val" id="checkout-total">$0.00</span></div>
+    <button class="stripe-btn" id="stripe-btn" onclick="startCheckout()">Pay securely with Stripe</button>
+    <p class="stripe-note">You'll be redirected to Stripe's secure checkout.<br/>We never store your card details.</p>
+  </div>
+</div>
+<div id="footer-container"></div>
+<div class="toast" id="toast"></div>
+<script src="/shared.js"></script>
+<script>
+document.getElementById('nav-container').innerHTML=navHTML('');
+document.getElementById('footer-container').innerHTML=footerHTML();
+initNav();
+const cart=getCart();
+if(!cart.length) window.location.href='/cart';
+function renderSummary(){
+  document.getElementById('checkout-items').innerHTML=cart.map(i=>`<div class="checkout-item"><div><p class="checkout-item-name">${i.name}</p><p class="checkout-item-meta">${i.tag||'Handmade soap'} · Qty ${i.quantity}</p></div><span class="checkout-item-price">$${(parseFloat(i.price)*i.quantity).toFixed(2)}</span></div>`).join('');
+  document.getElementById('checkout-total').textContent='$'+cartTotal().toFixed(2);
+}
+function togglePassword(){
+  document.getElementById('password-field').style.display=document.getElementById('create-account').checked?'block':'none';
+}
+async function startCheckout(){
+  const name=document.getElementById('f-name').value.trim();
+  const lastname=document.getElementById('f-lastname').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  const createAccount=document.getElementById('create-account').checked;
+  const password=document.getElementById('f-password').value;
+  const errEl=document.getElementById('checkout-error');
+  errEl.textContent='';
+  if(!name){errEl.textContent='Please enter your first name.';return;}
+  if(!email||!email.includes('@')){errEl.textContent='Please enter a valid email.';return;}
+  if(createAccount&&password.length<6){errEl.textContent='Password must be at least 6 characters.';return;}
+  const btn=document.getElementById('stripe-btn');
+  btn.disabled=true; btn.textContent='Redirecting to Stripe…';
+  try{
+    const res=await api('POST','/api/create-checkout-session',{
+      items:cart,customerEmail:email,customerName:name+' '+lastname,
+      createAccount,password:createAccount?password:undefined
+    });
+    if(res.url) window.location.href=res.url;
+    else throw new Error('No checkout URL returned');
+  }catch(e){
+    errEl.textContent=e.message;
+    btn.disabled=false; btn.textContent='Pay securely with Stripe';
+  }
+}
+renderSummary();
+</script>
+</body>
+</html>
