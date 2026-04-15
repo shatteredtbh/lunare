@@ -7,48 +7,129 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="/shared.css"/>
 <style>
-.shop-hero{padding:4rem 3rem;border-bottom:1px solid var(--sand);}
-.shop-hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;line-height:1.1;margin-bottom:0.5rem;}
-.shop-hero h1 em{font-style:italic;color:var(--dusk);}
-.shop-hero p{font-size:14px;color:var(--accent);}
-.shop-controls{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;border-bottom:1px solid var(--sand);background:var(--moon);}
-.filter-tags{display:flex;gap:0.6rem;flex-wrap:wrap;}
-.filter-tag{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:6px 14px;border:1px solid var(--sand);background:transparent;color:var(--accent);cursor:pointer;transition:all 0.2s;font-family:'Lato',sans-serif;}
-.filter-tag:hover,.filter-tag.active{background:var(--dusk);color:var(--cream);border-color:var(--dusk);}
+.shop-hero{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--sand);}
+.shop-hero-left{padding:4rem 3rem;border-right:1px solid var(--sand);}
+.shop-hero-left h1{font-family:'Cormorant Garamond',serif;font-size:58px;font-weight:300;line-height:1.05;margin-bottom:0.8rem;}
+.shop-hero-left h1 em{font-style:italic;color:var(--dusk);}
+.shop-hero-left p{font-size:13px;color:var(--accent);line-height:1.7;}
+.shop-hero-right{padding:4rem 3rem;display:flex;flex-direction:column;justify-content:flex-end;gap:0.5rem;}
+.shop-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--sand);border:1px solid var(--sand);border-radius:4px;overflow:hidden;}
+.shop-stat{background:var(--cream);padding:1.2rem 1.5rem;}
+.shop-stat-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--night);line-height:1;}
+.shop-stat-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-top:4px;}
+
+.shop-body{display:grid;grid-template-columns:220px 1fr;border-bottom:1px solid var(--sand);}
+.shop-sidebar{padding:2.5rem 2rem;border-right:1px solid var(--sand);position:sticky;top:65px;align-self:start;}
+.sidebar-section{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--bone);}
+.sidebar-section:last-child{border-bottom:none;margin-bottom:0;}
+.sidebar-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+.filter-list{display:flex;flex-direction:column;gap:0.3rem;}
+.filter-item{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;cursor:pointer;transition:background 0.15s;border-radius:3px;}
+.filter-item:hover{background:var(--bone);}
+.filter-item.active{background:var(--night);}
+.filter-item.active span{color:var(--cream);}
+.filter-item.active small{color:var(--clay);}
+.filter-item span{font-size:12px;color:var(--night);}
+.filter-item small{font-size:10px;color:var(--clay);}
+.price-inputs{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
+.price-input{padding:7px 10px;border:1px solid var(--sand);background:var(--moon);font-family:'Lato',sans-serif;font-size:12px;color:var(--night);outline:none;width:100%;}
+.price-input:focus{border-color:var(--dusk);}
+
+.shop-content{padding:2.5rem 2.5rem;}
+.shop-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--bone);}
+.product-count-label{font-size:12px;color:var(--accent);letter-spacing:0.08em;}
+.toolbar-right{display:flex;align-items:center;gap:1rem;}
 .sort-select{font-size:11px;letter-spacing:0.1em;padding:7px 12px;border:1px solid var(--sand);background:var(--cream);color:var(--accent);font-family:'Lato',sans-serif;cursor:pointer;outline:none;}
-.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--sand);border-bottom:1px solid var(--sand);}
-.product-count{font-size:11px;color:var(--clay);letter-spacing:0.1em;}
-.empty-state{padding:5rem;text-align:center;grid-column:1/-1;}
-.empty-state p{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--accent);}
+.view-toggle{display:flex;border:1px solid var(--sand);}
+.view-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;cursor:pointer;color:var(--clay);transition:all 0.15s;}
+.view-btn.active{background:var(--night);color:var(--cream);}
+
+.products-grid-4{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--sand);border:1px solid var(--sand);border-radius:4px;overflow:hidden;}
+.products-list{display:flex;flex-direction:column;gap:1px;background:var(--sand);border:1px solid var(--sand);border-radius:4px;overflow:hidden;}
+.product-list-item{display:grid;grid-template-columns:100px 1fr auto;gap:1.5rem;align-items:center;padding:1.5rem;background:var(--cream);transition:background 0.2s;}
+.product-list-item:hover{background:var(--moon);}
+.list-swatch{width:100px;height:64px;border-radius:4px;display:flex;align-items:center;justify-content:center;}
+.list-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--night);margin-bottom:4px;}
+.list-tag{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.list-desc{font-size:12px;color:var(--accent);line-height:1.6;}
+.list-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.8rem;}
+.list-price{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--night);}
+
+.empty-state{padding:5rem;text-align:center;background:var(--cream);}
+.empty-state p{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--accent);margin-bottom:1rem;}
+
+.add-btn{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:8px 16px;border:1px solid var(--dusk);background:transparent;color:var(--dusk);cursor:pointer;transition:all 0.2s;font-family:'Lato',sans-serif;white-space:nowrap;}
+.add-btn:hover{background:var(--dusk);color:var(--cream);}
 </style>
 </head>
 <body>
 <div id="nav-container"></div>
+
 <section class="shop-hero">
-  <p class="section-eyebrow">The collection</p>
-  <h1>Every bar, <em>crafted.</em></h1>
-  <p>Small batch. Handmade. Honest ingredients.</p>
-</section>
-<div class="shop-controls">
-  <div class="filter-tags">
-    <button class="filter-tag active" onclick="setFilter('all',this)">All</button>
-    <button class="filter-tag" onclick="setFilter('New moon',this)">New moon</button>
-    <button class="filter-tag" onclick="setFilter('Full moon',this)">Full moon</button>
-    <button class="filter-tag" onclick="setFilter('Crescent',this)">Crescent</button>
-    <button class="filter-tag" onclick="setFilter('Waning',this)">Waning</button>
-    <button class="filter-tag" onclick="setFilter('Waxing',this)">Waxing</button>
+  <div class="shop-hero-left">
+    <p class="section-eyebrow">The collection</p>
+    <h1>Every bar,<br/><em>crafted.</em></h1>
+    <p>Small batch. Handmade. Cold-process only.<br/>Real ingredients, honestly listed.</p>
   </div>
-  <div style="display:flex;align-items:center;gap:1rem;">
-    <span class="product-count" id="product-count"></span>
-    <select class="sort-select" onchange="setSort(this.value)">
-      <option value="default">Sort: Featured</option>
-      <option value="price-asc">Price: Low to high</option>
-      <option value="price-desc">Price: High to low</option>
-      <option value="name">Name: A–Z</option>
-    </select>
+  <div class="shop-hero-right">
+    <div class="shop-stats">
+      <div class="shop-stat"><p class="shop-stat-num" id="stat-count">12</p><p class="shop-stat-label">Products</p></div>
+      <div class="shop-stat"><p class="shop-stat-num">$12</p><p class="shop-stat-label">Starting from</p></div>
+      <div class="shop-stat"><p class="shop-stat-num">4–6</p><p class="shop-stat-label">Week cure time</p></div>
+      <div class="shop-stat"><p class="shop-stat-num">100%</p><p class="shop-stat-label">Handmade</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="shop-body">
+  <aside class="shop-sidebar">
+    <div class="sidebar-section">
+      <p class="sidebar-title">Moon phase</p>
+      <div class="filter-list" id="filter-list">
+        <div class="filter-item active" onclick="setFilter('all',this)"><span>All</span><small id="count-all">0</small></div>
+        <div class="filter-item" onclick="setFilter('New moon',this)"><span>New moon</span><small id="count-new">0</small></div>
+        <div class="filter-item" onclick="setFilter('Full moon',this)"><span>Full moon</span><small id="count-full">0</small></div>
+        <div class="filter-item" onclick="setFilter('Crescent',this)"><span>Crescent</span><small id="count-crescent">0</small></div>
+        <div class="filter-item" onclick="setFilter('Waning',this)"><span>Waning</span><small id="count-waning">0</small></div>
+        <div class="filter-item" onclick="setFilter('Waxing',this)"><span>Waxing</span><small id="count-waxing">0</small></div>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-title">Price range</p>
+      <div class="price-inputs">
+        <input class="price-input" type="number" id="price-min" placeholder="Min" min="0" onchange="renderShop()"/>
+        <input class="price-input" type="number" id="price-max" placeholder="Max" min="0" onchange="renderShop()"/>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-title">Sort by</p>
+      <div class="filter-list">
+        <div class="filter-item active" id="sort-default" onclick="setSort('default',this)"><span>Featured</span></div>
+        <div class="filter-item" id="sort-asc" onclick="setSort('price-asc',this)"><span>Price: Low to high</span></div>
+        <div class="filter-item" id="sort-desc" onclick="setSort('price-desc',this)"><span>Price: High to low</span></div>
+        <div class="filter-item" id="sort-name" onclick="setSort('name',this)"><span>Name: A–Z</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="shop-content">
+    <div class="shop-toolbar">
+      <span class="product-count-label" id="product-count">Loading...</span>
+      <div class="toolbar-right">
+        <div class="view-toggle">
+          <button class="view-btn active" id="grid-btn" onclick="setView('grid')" title="Grid view">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg>
+          </button>
+          <button class="view-btn" id="list-btn" onclick="setView('list')" title="List view">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="14" height="2"/><rect x="0" y="6" width="14" height="2"/><rect x="0" y="12" width="14" height="2"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="shop-grid"></div>
   </div>
 </div>
-<div class="shop-grid" id="shop-grid"><p style="padding:3rem;color:var(--accent);font-size:13px;grid-column:1/-1;">Loading...</p></div>
+
 <div id="footer-container"></div>
 <div class="toast" id="toast"></div>
 <script src="/shared.js"></script>
@@ -56,33 +137,102 @@
 document.getElementById('nav-container').innerHTML=navHTML('shop');
 document.getElementById('footer-container').innerHTML=footerHTML();
 initNav();
-let allProducts=[],currentFilter='all',currentSort='default',ordersEnabled=true;
+
+let allProducts=[],currentFilter='all',currentSort='default',currentView='grid',ordersEnabled=true;
+
 async function loadShop(){
   try{
     const [products,settings]=await Promise.all([api('GET','/api/products'),api('GET','/api/settings')]);
     allProducts=products;
     ordersEnabled=settings.orders!==false;
+    updateCounts();
     renderShop();
-  }catch(e){document.getElementById('shop-grid').innerHTML='<p style="padding:3rem;color:var(--accent);grid-column:1/-1;">Failed to load products.</p>';}
+    document.getElementById('stat-count').textContent=products.length;
+  }catch(e){
+    document.getElementById('shop-grid').innerHTML='<div class="empty-state"><p>Failed to load products.</p></div>';
+    document.getElementById('product-count').textContent='';
+  }
 }
+
+function updateCounts(){
+  const counts={'New moon':0,'Full moon':0,'Crescent':0,'Waning':0,'Waxing':0};
+  allProducts.forEach(p=>{ if(counts[p.tag]!==undefined) counts[p.tag]++; });
+  document.getElementById('count-all').textContent=allProducts.length;
+  document.getElementById('count-new').textContent=counts['New moon'];
+  document.getElementById('count-full').textContent=counts['Full moon'];
+  document.getElementById('count-crescent').textContent=counts['Crescent'];
+  document.getElementById('count-waning').textContent=counts['Waning'];
+  document.getElementById('count-waxing').textContent=counts['Waxing'];
+}
+
 function setFilter(f,el){
   currentFilter=f;
-  document.querySelectorAll('.filter-tag').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#filter-list .filter-item').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   renderShop();
 }
-function setSort(s){currentSort=s;renderShop();}
+
+function setSort(s,el){
+  currentSort=s;
+  document.querySelectorAll('.sidebar-section .filter-item[id^=sort]').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderShop();
+}
+
+function setView(v){
+  currentView=v;
+  document.getElementById('grid-btn').classList.toggle('active',v==='grid');
+  document.getElementById('list-btn').classList.toggle('active',v==='list');
+  renderShop();
+}
+
 function renderShop(){
   let products=[...allProducts];
   if(currentFilter!=='all') products=products.filter(p=>p.tag===currentFilter);
+  const minP=parseFloat(document.getElementById('price-min').value)||0;
+  const maxP=parseFloat(document.getElementById('price-max').value)||Infinity;
+  products=products.filter(p=>parseFloat(p.price)>=minP&&parseFloat(p.price)<=maxP);
   if(currentSort==='price-asc') products.sort((a,b)=>parseFloat(a.price)-parseFloat(b.price));
   else if(currentSort==='price-desc') products.sort((a,b)=>parseFloat(b.price)-parseFloat(a.price));
   else if(currentSort==='name') products.sort((a,b)=>a.name.localeCompare(b.name));
+
   document.getElementById('product-count').textContent=products.length+' product'+(products.length!==1?'s':'');
   const grid=document.getElementById('shop-grid');
-  if(!products.length){grid.innerHTML='<div class="empty-state"><p>No products in this category yet.</p></div>';return;}
-  grid.innerHTML=products.map(p=>`<div class="product-card"><div class="product-swatch ${p.swatch}"><div class="swatch-soap ${p.soap}"></div></div><p class="product-tag">${p.tag}</p><h3 class="product-name">${p.name}</h3><p class="product-desc">${p.description}</p><div class="product-footer"><span class="product-price">$${parseFloat(p.price).toFixed(2)}</span>${ordersEnabled?`<button class="add-btn" onclick='addToCart(${JSON.stringify({id:p.id,name:p.name,price:p.price,tag:p.tag,swatch:p.swatch,soap:p.soap})})'>Add to cart</button>`:'<span style="font-size:11px;color:var(--clay);">Unavailable</span>'}</div></div>`).join('');
+
+  if(!products.length){
+    grid.innerHTML='<div class="empty-state"><p>No products match your filters.</p><button class="add-btn" onclick="setFilter(\'all\',document.querySelector(\'#filter-list .filter-item\'))">Clear filters</button></div>';
+    return;
+  }
+
+  if(currentView==='grid'){
+    grid.innerHTML=`<div class="products-grid-4">${products.map(p=>`
+      <div class="product-card">
+        <div class="product-swatch ${p.swatch}"><div class="swatch-soap ${p.soap}"></div></div>
+        <p class="product-tag">${p.tag}</p>
+        <h3 class="product-name">${p.name}</h3>
+        <p class="product-desc">${p.description}</p>
+        <div class="product-footer">
+          <span class="product-price">$${parseFloat(p.price).toFixed(2)}</span>
+          ${ordersEnabled?`<button class="add-btn" onclick='addToCart(${JSON.stringify({id:p.id,name:p.name,price:p.price,tag:p.tag,swatch:p.swatch,soap:p.soap})})'>Add to cart</button>`:'<span style="font-size:11px;color:var(--clay);">Unavailable</span>'}
+        </div>
+      </div>`).join('')}</div>`;
+  } else {
+    grid.innerHTML=`<div class="products-list">${products.map(p=>`
+      <div class="product-list-item">
+        <div class="list-swatch ${p.swatch}"><div class="swatch-soap ${p.soap}" style="width:60px;height:38px;border-radius:4px;border:1px solid rgba(255,255,255,0.5);"></div></div>
+        <div>
+          <p class="list-tag">${p.tag}</p>
+          <p class="list-name">${p.name}</p>
+          <p class="list-desc">${p.description}</p>
+        </div>
+        <div class="list-right">
+          <span class="list-price">$${parseFloat(p.price).toFixed(2)}</span>
+          ${ordersEnabled?`<button class="add-btn" onclick='addToCart(${JSON.stringify({id:p.id,name:p.name,price:p.price,tag:p.tag,swatch:p.swatch,soap:p.soap})})'>Add to cart</button>`:'<span style="font-size:11px;color:var(--clay);">Unavailable</span>'}
+        </div>
+      </div>`).join('')}</div>`;
+  }
 }
+
 loadShop();
 </script>
 </body>
